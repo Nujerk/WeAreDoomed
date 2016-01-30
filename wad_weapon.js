@@ -58,10 +58,19 @@ WADWeaponGatling.prototype.shoot = function(player){
         if(this.bullets.getFirstExists(false)) {
             var bullet = this.bullets.getFirstExists(false);
             bullet.anchor.setTo(0.5, 0.5);
-            bullet.reset(player.x, player.y + (player.height / 2));
             var side = 1;
+            var playerShift = player.width;
             if(player.facing == "left")
-            	side = -1;
+            {
+                side = -1;
+                playerShift = 0;
+            }
+
+            bullet.reset(player.x + playerShift, player.y + (player.height / 2));
+            
+            if(player.isAimingUp)
+                bullet.body.velocity.y = -300;
+
             bullet.body.velocity.x = side * this.bullet_velocity;
 
             this.isReadyToFire = false;

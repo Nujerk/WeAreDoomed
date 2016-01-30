@@ -18,6 +18,7 @@ WADPlayer = function (game, x, y) {
     this.weapons = null;
     this.leftAnimation = null;
     this.rightAnimation = null;
+    this.isAimingUp = false;
 
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
@@ -66,11 +67,24 @@ WADPlayer.prototype.update = function() {
 	if(!this.inputInitialized)
 		return;
 
+	if(this.lockKey.isDown)
+		this.lock();
+	else if(this.lockKey.isUp)
+		this.unlock();
+
+	if(this.rollKey.isDown)
+		this.roll();
+
+	if(this.fireKey.isDown)
+		this.shoot();
+	else if(this.specialKey.isDown)
+		this.special();
+
 	if(this.leftKey.isDown)
 		this.moveLeft();
 	else if(this.rightKey.isDown)
 		this.moveRight();
-	else if(this.leftKey.isUp || this.rightKey.isUp)
+	else if(this.leftKey.isUp && this.rightKey.isUp)
 		this.stop();
 	else if(this.downKey.isDown)
 		this.pickupWeapon();
@@ -80,21 +94,8 @@ WADPlayer.prototype.update = function() {
 	else if(this.upKey.isUp)
 		this.aimReset();
 	
-	if(this.fireKey.isDown)
-		this.shoot();
-	else if(this.specialKey.isDown)
-		this.special();
-	
 	if(this.jumpKey.isDown)
 		this.jump();
-
-	if(this.lockKey.isDown)
-		this.lock();
-	else if(this.lockKey.isUp)
-		this.unlock();
-
-	if(this.rollKey.isDown)
-		this.roll();
 };
 
 WADPlayer.prototype.onBulletHit = function(bullet, enemy) {
@@ -135,7 +136,7 @@ WADPlayer.prototype.inputsInit = function(){
 };
 
 WADPlayer.prototype.moveLeft = function(){
-	if(!this.locked);
+	if(!this.locked)
 		this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 
 	if(this.facing != "left"){
@@ -159,7 +160,7 @@ WADPlayer.prototype.stop = function(){
 };
 
 WADPlayer.prototype.jump = function(){
-	if(this.body.velocity.y != 0)
+	if(this.body.velocity.y != 0 || this.locked)
 		return;
 	this.body.velocity.y = PLAYER_JUMP_VELOCITY;
 };
@@ -176,22 +177,25 @@ WADPlayer.prototype.roll = function(){
 };
 
 WADPlayer.prototype.lock = function(){
-	if(this.locked == false)
-		this.locked = true;
+	if(this.body.blocked.down)
+		this.body.velocity.x = 0;
+
+	this.locked = true;
 };
 
 WADPlayer.prototype.unlock = function(){
-	if(this.locked == true)
-		this.locked = false;
+	this.locked = false;
 };
 
 WADPlayer.prototype.pickupWeapon = function(){
 };
 
 WADPlayer.prototype.aimUp = function(){
+	this.isAimingUp = true;
 };
 
 WADPlayer.prototype.aimReset = function(){
+	this.isAimingUp = false;
 };
 
 WADPlayer.prototype.playerExplode = function(){

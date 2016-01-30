@@ -36,8 +36,10 @@ WADEnemy4.prototype.constructor = WADEnemy4;
  * Automatically called by World.update
  */
 WADEnemy4.prototype.update = function() {
-    this.checkAggro();
-    this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
+    if(this.alive) {
+        this.checkAggro();
+        this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
+    }
 };
 
 WADEnemy4.prototype.onBulletHit = function(player, bullet) {

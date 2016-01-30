@@ -54,7 +54,7 @@ GameTemplate.Game.prototype = {
     },
 
     update: function() {
-        this.physics.arcade.collide(this.player, )
+        this.physics.arcade.collide(this.player, this.layer);
         // for(enemy in this.enemies) {
         //     // console.log(enemy.checkAggro());
         // }

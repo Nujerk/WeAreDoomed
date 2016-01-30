@@ -1,32 +1,24 @@
 {
     "main": [
         {
-            "type": "spritesheet",
+            "type": "image",
             "key": "tileset_test1",
-            "url": "assets/tileset_test1.png",
-            "frameWidth": 35,
-            "frameHeight": 35
+            "url": "assets/tileset_test1.png"
         },
         {
-            "type": "spritesheet",
+            "type": "image",
             "key": "door",
-            "url": "assets/door.png",
-            "frameWidth": 35,
-            "frameHeight": 35
+            "url": "assets/door.png"
         },
         {
-            "type": "spritesheet",
+            "type": "image",
             "key": "enemy",
-            "url": "assets/enemy.png",
-            "frameWidth": 35,
-            "frameHeight": 35
+            "url": "assets/enemy.png"
         },
         {
-            "type": "spritesheet",
+            "type": "image",
             "key": "player",
-            "url": "assets/player.png",
-            "frameWidth": 35,
-            "frameHeight": 35
+            "url": "assets/player.png"
         },
         {
             "type": "tilemap",

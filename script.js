@@ -25,12 +25,16 @@ GameTemplate.Game.prototype = {
 
         map.setCollisionBetween(0, 6569);
 
-        layer = map.createLayer("Tile Layer 1");
+        var layer = map.createLayer("Tile Layer 1");
+        layer.resizeWorld();
 
-        enemies = this.add.group();
+        this.physics.startSystem(Phaser.Physics.ARCADE);
+
+        var enemies = this.add.group();
         enemies.enableBody = true;
 
-        map.createFromObjects('Livables', 8, 'enemy', 0, true, false, enemies);
+        map.createFromObjects('Livables', 6, 'enemy', 0, true, false, enemies);
+        console.log(enemies);
 
         // sprite = this.add.sprite(0, 0, "player");
     },

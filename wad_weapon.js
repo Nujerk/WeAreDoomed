@@ -21,13 +21,14 @@ WADWeaponGatling = function (game) {
 
     this.overheating = 0;
     this.cantShoot = false;
-    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    var style = { font: "bold 24px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
     //  The Text is positioned at 0, 100
-    this.text = this.game.add.text(0, 0, this.overheating, style);
+    this.text = this.game.add.text(15, 35, this.overheating + "°C" , style);
     this.text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
 
     //  We'll set the bounds to be from x0, y100 and be 800px wide by 100px high
-    this.text.setTextBounds(50, 100, 600, 100);
+    this.text.fixedToCamera = true;
+    this.text.cameraOffset.setTo(15, 35);
 
     //  Create our Timer
     this.overheatingTimer = this.game.time.create(false);
@@ -70,10 +71,7 @@ WADWeaponGatling.prototype.shoot = function(player){
     }
 
     if(this.overheating >= 100)
-    {
         this.cantShoot = true;
-        console.log("OVERHEAT !!!");
-    }
 
     // Fire cooldown checker
     if(this.game.time.now > this.lastShot + this.firerate) {
@@ -85,20 +83,25 @@ WADWeaponGatling.prototype.special = function(player){
     if(!this.cantShoot)
         return;
 
-    console.log("FEUER FREI!");
-
     this.cantShoot = false;
     this.overheating = 0;
 };
 
 WADWeaponGatling.prototype.update = function(){
 
-    this.text.text = this.overheating;
-    
-    if(this.cantShoot && this.overheating <= 50)
+    this.text.text = this.overheating + "°C";
+
+    if(this.cantShoot)
     {
-        console.log("Gatling Ready !");   
-        this.cantShoot = false;
+
+        if(this.overheating <= 50)
+        {
+            this.cantShoot = false;    
+        }
+        else
+        {
+            this.text.text += " OVERHEATING !!!";
+        }
     }
 };
 

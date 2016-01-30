@@ -33,6 +33,15 @@ WADPlayer = function (game, x, y) {
 
     this.weapon = new WADWeaponGatling(game);
 
+	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    //  The Text is positioned at 0, 100
+    this.healthtext = this.game.add.text(10, 5, this.health + "PV" , style);
+    this.healthtext.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+
+    //  We'll set the bounds to be from x0, y100 and be 800px wide by 100px high
+    this.healthtext.fixedToCamera = true;
+    this.healthtext.cameraOffset.setTo(10, 5);
+
     this.events.onKilled.add(this.playerExplode, this);
 };
 
@@ -51,6 +60,8 @@ WADPlayer.prototype.update = function() {
     this.game.physics.arcade.overlap(this, this.weapons, this.onWeaponCollide);
 
     this.weapon.update();
+
+    this.healthtext.text = this.health + "PV";
 
 	if(!this.inputInitialized)
 		return;

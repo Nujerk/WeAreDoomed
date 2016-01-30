@@ -41,6 +41,11 @@ WADEnemy4.prototype.update = function() {
 
 WADEnemy4.prototype.onBulletHit = function(player, bullet) {
     bullet.kill();
+    player.damage(1);
+};
+
+WADEnemy4.prototype.setPlayer = function(player) {
+    this.player = player;
 };
 
 WADEnemy4.prototype.checkAggro = function() {

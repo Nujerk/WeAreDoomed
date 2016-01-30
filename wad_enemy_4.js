@@ -25,6 +25,7 @@ WADEnemy4 = function (game, x, y) {
     this.lastShot = 0;
     this.firerate = 200;
     this.bullet_velocity = 500;
+    this.range = this.game.rnd.integerInRange(250, 270);
 };
 
 WADEnemy4.prototype = Object.create(Phaser.Sprite.prototype);
@@ -56,7 +57,7 @@ WADEnemy4.prototype.checkAggro = function() {
         }
 
         // If player is in range we fire else we try to reach the range value
-        if(distance <= 250) {
+        if(distance <= this.range) {
             this.body.velocity.x = 0;
             this.fire(side);
         } else {

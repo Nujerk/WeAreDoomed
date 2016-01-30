@@ -13,6 +13,7 @@ GameTemplate.Game.prototype = {
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
+        this.load.image('background', 'assets/newtest/artwork/bullet.png');
     },
 
     create: function() {
@@ -22,6 +23,12 @@ GameTemplate.Game.prototype = {
         //     this.scale.startFullScreen(false);
         // }.bind(this));
 
+        // background = this.add.tileSprite(0,
+        //                                  0,
+        //                                  1024,
+        //                                  1024,
+        //                                  "background");
+
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.physics.arcade.gravity.y = 300;
@@ -30,9 +37,9 @@ GameTemplate.Game.prototype = {
         map.addTilesetImage("enemy");
         map.addTilesetImage("test 1");
 
-        map.setCollisionBetween(0, 6569);
 
         this.layer = map.createLayer("Tile Layer 1");
+        map.setCollisionBetween(1, 10000, true, "Tile Layer 1");
         this.layer.resizeWorld();
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -50,13 +57,10 @@ GameTemplate.Game.prototype = {
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
 
-        // this.enemies.setAll('player', this.player);
+        this.enemies.setAll('player', this.player);
     },
 
     update: function() {
         this.physics.arcade.collide(this.player, this.layer);
-        // for(enemy in this.enemies) {
-        //     // console.log(enemy.checkAggro());
-        // }
     },
 }

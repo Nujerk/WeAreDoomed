@@ -14,6 +14,12 @@ WADPlayer = function (game, x, y) {
 
     this.leftAnimation = null;
     this.rightAnimation = null;
+
+    game.physics.enable(this, Phaser.Physics.ARCADE);
+    this.body.collideWorldBounds = true;
+    this.body.gravity.y = 1000;
+    this.body.maxVelocity.y = 500;
+
     this.game = game;
     game.input.gamepad.start();
     this.pad = game.input.gamepad.pad1;
@@ -76,8 +82,8 @@ WADPlayer.prototype.inputsInit = function(){
 		this.rightKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.D);
 		this.fireKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 		this.specialKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
-		this.jumpKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.A);
-		this.lockKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		this.jumpKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		this.lockKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.A);
 		this.rollKey 	= this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 	}
 	else
@@ -122,8 +128,9 @@ WADPlayer.prototype.stop = function(){
 };
 
 WADPlayer.prototype.jump = function(){
-	if(this.body.onFloor())
-		this.body.velocity.y = PLAYER_JUMP_VELOCITY;
+	if(this.body.velocity.y != 0)
+		return;
+	this.body.velocity.y = PLAYER_JUMP_VELOCITY;
 };
 
 WADPlayer.prototype.shoot = function(){

@@ -64,7 +64,7 @@ WADPlayer.prototype.moveLeft = function(){
 	this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 	if(!this.facing == "left"){
 		this.animations.play(this.leftAnimation);
-		this.facing = "left";		
+		this.facing = "left";
 	}
 };
 
@@ -72,7 +72,7 @@ WADPlayer.prototype.moveRight = function(){
 	this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 	if(!this.facing == "right"){
 		this.animations.play(this.rightAnimation);
-		this.facing = "right";		
+		this.facing = "right";
 	}
 };
 

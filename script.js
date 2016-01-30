@@ -11,6 +11,7 @@ GameTemplate.Game.prototype = {
 
         this.load.image('enemy', 'assets/newtest/enemy.png');
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
+        this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
     },
 
@@ -23,7 +24,7 @@ GameTemplate.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.physics.arcade.gravity.y = 1500;
+        this.physics.arcade.gravity.y = 300;
 
         var map = this.add.tilemap("map");
         map.addTilesetImage("enemy");
@@ -31,28 +32,28 @@ GameTemplate.Game.prototype = {
 
         map.setCollisionBetween(0, 6569);
 
-        var layer = map.createLayer("Tile Layer 1");
-        layer.resizeWorld();
+        this.layer = map.createLayer("Tile Layer 1");
+        this.layer.resizeWorld();
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-
         this.player = this.add.group();
         this.player.enableBody = true;
-        // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
-        map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
+        map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
+        // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
+
+        this.player = this.player.children[0];
+        this.camera.follow(this.player);
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
-        this.enemies.callAll('setPlayer', this, this.player.children[0]);
-        console.log(this.enemies);
-        // for(enemy in this.enemies.children) {
 
-        // }
+        // this.enemies.setAll('player', this.player);
     },
 
     update: function() {
+        this.physics.arcade.collide(this.player, )
         // for(enemy in this.enemies) {
         //     // console.log(enemy.checkAggro());
         // }

@@ -13,6 +13,7 @@ GameTemplate.Game.prototype = {
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
+        this.load.image('background', 'assets/newtest/artwork/Fond_montagne.png');
     },
 
     create: function() {
@@ -22,11 +23,12 @@ GameTemplate.Game.prototype = {
             this.scale.startFullScreen(false);
         }.bind(this));
 
-        // background = this.add.tileSprite(0,
-        //                                  0,
-        //                                  1024,
-        //                                  1024,
-        //                                  "background");
+        background = this.add.tileSprite(0,
+                                         0,
+                                         1920,
+                                         1080,
+                                         "background");
+        background.scale.setTo(1, 0.5);
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -62,5 +64,6 @@ GameTemplate.Game.prototype = {
 
     update: function() {
         this.physics.arcade.collide(this.player, this.layer);
+        // background.tilePosition.x -= 2;
     },
 }

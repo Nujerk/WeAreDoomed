@@ -14,6 +14,7 @@ GameTemplate.Game.prototype = {
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
+        this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_resized.png');
     },
 
     create: function() {
@@ -30,8 +31,6 @@ GameTemplate.Game.prototype = {
                                          "background");
         background.scale.setTo(1, 0.5);
 
-        this.physics.startSystem(Phaser.Physics.ARCADE);
-
         this.physics.arcade.gravity.y = 300;
 
         var map = this.add.tilemap("map");
@@ -42,6 +41,14 @@ GameTemplate.Game.prototype = {
         this.layer = map.createLayer("Tile Layer 1");
         map.setCollisionBetween(1, 10000, true, "Tile Layer 1");
         this.layer.resizeWorld();
+
+        this.physics.startSystem(Phaser.Physics.ARCADE);
+
+        backgroundBuilding = this.add.tileSprite(70,
+                                                 0,
+                                                 1400,
+                                                 350,
+                                                 "backgroundBuilding");
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 

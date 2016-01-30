@@ -23,7 +23,7 @@ GameTemplate.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.physics.arcade.gravity.y = 1500;
+        this.physics.arcade.gravity.y = 300;
 
         var map = this.add.tilemap("map");
         map.addTilesetImage("enemy");
@@ -36,17 +36,14 @@ GameTemplate.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-
         this.player = this.add.group();
-        this.player.enableBody = true;
-        // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
-        map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
+        map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
+        //map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
-        console.log(this.enemies);
         // for(enemy in this.enemies.children) {
 
         // }

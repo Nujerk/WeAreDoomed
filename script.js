@@ -13,15 +13,14 @@ GameTemplate.Game.prototype = {
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
-        this.load.image('background', 'assets/newtest/artwork/bullet.png');
     },
 
     create: function() {
         // Keep original size
-        // this.input.onDown.add(function(){
-        //     this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
-        //     this.scale.startFullScreen(false);
-        // }.bind(this));
+        this.input.onDown.add(function(){
+            this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+            this.scale.startFullScreen(false);
+        }.bind(this));
 
         // background = this.add.tileSprite(0,
         //                                  0,
@@ -49,15 +48,16 @@ GameTemplate.Game.prototype = {
         map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
         // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
 
-        this.player = this.player.children[0];
-        this.camera.follow(this.player);
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
 
-        this.enemies.setAll('player', this.player);
+        this.player.setAll('enemies', this.enemies);
+        this.player = this.player.children[0];
+        this.camera.follow(this.player);
+        // this.enemies.setAll('player', this.player);
     },
 
     update: function() {

@@ -12,6 +12,7 @@ WADEnemy4 = function (game, x, y) {
     this.game = game;
     this.player = null;
 
+    this.health = 1;
     this.bullets = game.add.group()
     this.bullets.enableBody = true;
     this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -41,7 +42,7 @@ WADEnemy4.prototype.update = function() {
 
 WADEnemy4.prototype.onBulletHit = function(player, bullet) {
     bullet.kill();
-    player.damage(1);
+    /*player.damage(1);*/
 };
 
 WADEnemy4.prototype.setPlayer = function(player) {

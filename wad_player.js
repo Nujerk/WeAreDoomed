@@ -12,7 +12,10 @@ WADPlayer = function (game, x, y) {
     this.facing = "right";
     this.locked = false;
     this.inputInitialized = false;
+    this.weapon = null;
 
+    this.enemies = null;
+    this.weapons = null;
     this.leftAnimation = null;
     this.rightAnimation = null;
 
@@ -28,21 +31,9 @@ WADPlayer = function (game, x, y) {
     this.pad.onConnectCallback = this.inputsInit.bind(this);
     game.input.keyboard.onDownCallback = this.inputsInit.bind(this);
 
+    this.weapon = new WADWeaponGatling(game);
+
     this.events.onKilled.add(this.playerExplode, this);
-
-    this.bullets = game.add.group()
-    this.bullets.enableBody = true;
-    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    this.bullets.createMultiple(30, 'bullet');
-    this.bullets.forEach(function(bullet){
-        bullet.checkWorldBounds = true;
-        bullet.outOfBoundsKill = true;
-    }, this);
-
-    this.isReadyToFire = true;
-    this.lastShot = 0;
-    this.firerate = 100;
-    this.bullet_velocity = 500;
 };
 
 WADPlayer.prototype = Object.create(Phaser.Sprite.prototype);
@@ -52,6 +43,14 @@ WADPlayer.prototype.constructor = WADPlayer;
  * Automatically called by World.update
  */
 WADPlayer.prototype.update = function() {
+
+	/// Player bullets damage enemies
+    this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
+
+    /// Player and weapon collides together (so that player can pick them up)
+    this.game.physics.arcade.overlap(this, this.weapons, this.onWeaponCollide);
+
+    this.weapon.update();
 
 	if(!this.inputInitialized)
 		return;
@@ -72,8 +71,6 @@ WADPlayer.prototype.update = function() {
 	
 	if(this.fireKey.isDown)
 		this.shoot();
-	else if(this.fireKey.isUp)
-		this.stopShooting();
 	else if(this.specialKey.isDown)
 		this.special();
 	
@@ -87,6 +84,11 @@ WADPlayer.prototype.update = function() {
 
 	if(this.rollKey.isDown)
 		this.roll();
+};
+
+WADPlayer.prototype.onBulletHit = function(bullet, enemy) {
+    bullet.kill();
+    enemy.damage(1);
 };
 
 WADPlayer.prototype.inputsInit = function(){
@@ -152,33 +154,11 @@ WADPlayer.prototype.jump = function(){
 };
 
 WADPlayer.prototype.shoot = function(){
-	if(this.isReadyToFire) {
-        if(this.bullets.getFirstExists(false)) {
-            var bullet = this.bullets.getFirstExists(false);
-            bullet.anchor.setTo(0.5, 0.5);
-            bullet.reset(this.x, this.y + (this.height / 2));
-            var side = 1;
-            console.log(this.facing);
-
-            if(this.facing == "left")
-            	side = -1;
-            bullet.body.velocity.x = side * this.bullet_velocity;
-
-            this.isReadyToFire = false;
-            this.lastShot = this.game.time.now;
-        }
-    }
-
-    // Fire cooldown checker
-    if(this.game.time.now > this.lastShot + this.firerate) {
-        this.isReadyToFire = true;
-    }
-};
-
-WADPlayer.prototype.stopShooting = function(){
+	this.weapon.shoot(this);
 };
 
 WADPlayer.prototype.special = function(){
+	this.weapon.special(this);
 };
 
 WADPlayer.prototype.roll = function(){

@@ -1,5 +1,6 @@
-PLAYER_MOVE_VELOCITY = 150;
-PLAYER_JUMP_VELOCITY = -500;
+PLAYER_MOVE_VELOCITY 	= 150;
+PLAYER_JUMP_VELOCITY 	= -500;
+PLAYER_INITIAL_LIFE 	= 10;
 
 /**
  * WAD player class
@@ -18,6 +19,7 @@ WADPlayer = function (game, x, y) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
     this.body.gravity.y = 1000;
+    this.health = PLAYER_INITIAL_LIFE;
     this.body.maxVelocity.y = 500;
 
     this.game = game;
@@ -25,6 +27,22 @@ WADPlayer = function (game, x, y) {
     this.pad = game.input.gamepad.pad1;
     this.pad.onConnectCallback = this.inputsInit.bind(this);
     game.input.keyboard.onDownCallback = this.inputsInit.bind(this);
+
+    this.events.onKilled.add(this.playerExplode, this);
+
+    this.bullets = game.add.group()
+    this.bullets.enableBody = true;
+    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    this.bullets.createMultiple(30, 'bullet');
+    this.bullets.forEach(function(bullet){
+        bullet.checkWorldBounds = true;
+        bullet.outOfBoundsKill = true;
+    }, this);
+
+    this.isReadyToFire = true;
+    this.lastShot = 0;
+    this.firerate = 100;
+    this.bullet_velocity = 500;
 };
 
 WADPlayer.prototype = Object.create(Phaser.Sprite.prototype);
@@ -107,7 +125,7 @@ WADPlayer.prototype.moveLeft = function(){
 	if(!this.locked);
 		this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 
-	if(!this.facing == "left"){
+	if(this.facing != "left"){
 		this.animations.play(this.leftAnimation);
 		this.facing = "left";
 	}
@@ -117,7 +135,7 @@ WADPlayer.prototype.moveRight = function(){
 	if(!this.locked)
 		this.body.velocity.x = PLAYER_MOVE_VELOCITY;
 
-	if(!this.facing == "right"){
+	if(this.facing != "right"){
 		this.animations.play(this.rightAnimation);
 		this.facing = "right";
 	}
@@ -134,6 +152,27 @@ WADPlayer.prototype.jump = function(){
 };
 
 WADPlayer.prototype.shoot = function(){
+	if(this.isReadyToFire) {
+        if(this.bullets.getFirstExists(false)) {
+            var bullet = this.bullets.getFirstExists(false);
+            bullet.anchor.setTo(0.5, 0.5);
+            bullet.reset(this.x, this.y + (this.height / 2));
+            var side = 1;
+            console.log(this.facing);
+
+            if(this.facing == "left")
+            	side = -1;
+            bullet.body.velocity.x = side * this.bullet_velocity;
+
+            this.isReadyToFire = false;
+            this.lastShot = this.game.time.now;
+        }
+    }
+
+    // Fire cooldown checker
+    if(this.game.time.now > this.lastShot + this.firerate) {
+        this.isReadyToFire = true;
+    }
 };
 
 WADPlayer.prototype.stopShooting = function(){
@@ -162,4 +201,16 @@ WADPlayer.prototype.aimUp = function(){
 };
 
 WADPlayer.prototype.aimReset = function(){
+};
+
+WADPlayer.prototype.playerExplode = function(){
+	/// End Game
+	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    //  The Text is positioned at 0, 100
+    text = this.game.add.text(0, 0, "YOU DIED. CTHULU RULES THE EARTH.", style);
+    text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+
+    //  We'll set the bounds to be from x0, y100 and be 800px wide by 100px high
+    text.setTextBounds(50, 100, 600, 100);
 };

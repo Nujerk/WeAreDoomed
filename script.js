@@ -13,7 +13,7 @@ GameTemplate.Game.prototype = {
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
-        this.load.image('background', 'assets/newtest/artwork/Fond_montagne.png');
+        this.load.image('background', 'assets/newtest/Fond_montagne.png');
     },
 
     create: function() {

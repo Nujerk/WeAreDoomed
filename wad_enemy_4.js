@@ -11,6 +11,20 @@ WADEnemy4 = function (game, x, y) {
     this.rightAnimation = null;
     this.game = game;
     this.player = null;
+
+    this.bullets = game.add.group()
+    this.bullets.enableBody = true;
+    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    this.bullets.createMultiple(30, 'bullet');
+    this.bullets.forEach(function(bullet){
+        bullet.checkWorldBounds = true;
+        bullet.outOfBoundsKill = true;
+    }, this);
+
+    this.isReadyToFire = true;
+    this.lastShot = 0;
+    this.firerate = 200;
+    this.bullet_velocity = 500;
 };
 
 WADEnemy4.prototype = Object.create(Phaser.Sprite.prototype);
@@ -21,39 +35,34 @@ WADEnemy4.prototype.constructor = WADEnemy4;
  */
 WADEnemy4.prototype.update = function() {
     this.checkAggro();
+    this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
 };
 
-WADEnemy4.prototype.setPlayer = function(player) {
-    this.player = player;
-    console.log(this.player);
-    console.log(this);
+WADEnemy4.prototype.onBulletHit = function(player, bullet) {
+    bullet.kill();
 };
 
 WADEnemy4.prototype.checkAggro = function() {
     if(this.player != null) {
         var distance = Math.sqrt(Math.pow((this.player.x - this.x), 2) + Math.pow((this.player.y - this.y), 2));
-        console.log(this.player);
-        if(distance <= 150) {
-            console.log("BRAIN !");
-            // Check if player is on left or right
-            if(this.player.x > this.x) {
-                // Player on right
-                console.log('Player on right');
-            } else {
-                // Player on left
-                console.log("Player on left");
-            }
+
+        var side = 0;
+        // Check if player is on left or right
+        if(this.player.x > this.x) {
+            var side = 1;
+        } else {
+            // Player on left
+            var side= -1;
+        }
+
+        // If player is in range we fire else we try to reach the range value
+        if(distance <= 250) {
+            this.body.velocity.x = 0;
+            this.fire(side);
+        } else {
+            this.body.velocity.x = ENEMY_MOVE_VELOCITY * side;
         }
     }
-    // var fireballs = game.add.group()
-    // fireballs.enableBody = true;
-    // fireballs.physicsBodyType = Phaser.Physics.ARCADE;
-    // fireballs.createMultiple(30, 'fireball');
-    // fireballs.forEach(function(fireball){
-    //     fireball.animations.add('fireball');
-    //     fireball.checkWorldBounds = true;
-    //     fireball.outOfBoundsKill = true;
-    // }, this);
 };
 
 WADEnemy4.prototype.moveLeft = function(){
@@ -73,5 +82,25 @@ WADEnemy4.prototype.moveRight = function(){
 };
 
 WADEnemy4.prototype.stop = function(){
-	this.body.velocity.x = 0;
-}
+    this.body.velocity.x = 0;
+};
+
+WADEnemy4.prototype.fire = function(side){
+    if(this.isReadyToFire) {
+        if(this.bullets.getFirstExists(false)) {
+            var bullet = this.bullets.getFirstExists(false);
+            bullet.anchor.setTo(0.5, 0.5);
+            bullet.reset(this.x, this.y + (this.height / 2));
+            // bullet.play('fire', 10, true);
+            bullet.body.velocity.x = side * this.bullet_velocity;
+
+            this.isReadyToFire = false;
+            this.lastShot = this.game.time.now;
+        }
+    }
+
+    // Fire cooldown checker
+    if(this.game.time.now > this.lastShot + this.firerate) {
+        this.isReadyToFire = true;
+    }
+};

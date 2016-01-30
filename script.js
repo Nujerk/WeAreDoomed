@@ -25,9 +25,10 @@ GameTemplate.Game.prototype = {
 
         background = this.add.tileSprite(0,
                                          0,
-                                         1024,
-                                         1024,
+                                         1920,
+                                         1080,
                                          "background");
+        background.scale.setTo(1, 0.5);
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -62,5 +63,6 @@ GameTemplate.Game.prototype = {
 
     update: function() {
         this.physics.arcade.collide(this.player, this.layer);
+        // background.tilePosition.x -= 2;
     },
 }

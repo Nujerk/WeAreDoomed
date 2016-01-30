@@ -27,10 +27,10 @@ GameTemplate.Game.prototype = {
 
         layer = map.createLayer("Tile Layer 1");
 
-        // enemies = this.add.group();
-        // enemies.enableBody = true;
+        enemies = this.add.group();
+        enemies.enableBody = true;
 
-        // map.createFromObjects('Livables', 8, 'enemy', 0, true, false, enemies);
+        map.createFromObjects('Livables', 8, 'enemy', 0, true, false, enemies);
 
         // sprite = this.add.sprite(0, 0, "player");
     },

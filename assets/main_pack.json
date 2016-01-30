@@ -1,0 +1,39 @@
+{
+    "main": [
+        {
+            "type": "spritesheet",
+            "key": "tileset_test1",
+            "url": "assets/tileset_test1.png",
+            "frameWidth": 35,
+            "frameHeight": 35
+        },
+        {
+            "type": "spritesheet",
+            "key": "door",
+            "url": "assets/door.png",
+            "frameWidth": 35,
+            "frameHeight": 35
+        },
+        {
+            "type": "spritesheet",
+            "key": "enemy",
+            "url": "assets/enemy.png",
+            "frameWidth": 35,
+            "frameHeight": 35
+        },
+        {
+            "type": "spritesheet",
+            "key": "player",
+            "url": "assets/player.png",
+            "frameWidth": 35,
+            "frameHeight": 35
+        },
+        {
+            "type": "tilemap",
+            "key": "stage1",
+            "url": "assets/map_test1.json",
+            "data": null,
+            "format": "TILED_JSON"
+        }
+    ]
+}

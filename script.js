@@ -48,6 +48,7 @@ GameTemplate.Game.prototype = {
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
+        this.enemies.callAll('setPlayer', this, this.player.children[0]);
 
         // this.enemies.setAll('player', this.player);
     },

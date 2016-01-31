@@ -4,12 +4,22 @@
 
 /// GATLING
 WADWeaponGatling = function (game) {
-	this.bullets = game.add.group()
     this.game = game;
+
+	this.bullets = game.add.group()
     this.bullets.enableBody = true;
     this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
     this.bullets.createMultiple(30, 'bulletPlayer');
     this.bullets.forEach(function(bullet){
+        bullet.checkWorldBounds = true;
+        bullet.outOfBoundsKill = true;
+    }, this);
+
+    this.specialBullets = game.add.group()
+    this.specialBullets.enableBody = true;
+    this.specialBullets.physicsBodyType = Phaser.Physics.ARCADE;
+    this.specialBullets.createMultiple(30, 'bulletPlayer');
+    this.specialBullets.forEach(function(bullet){
         bullet.checkWorldBounds = true;
         bullet.outOfBoundsKill = true;
     }, this);
@@ -63,7 +73,6 @@ WADWeaponGatling.prototype.shoot = function(player){
             if(player.facing == "left")
             {
                 side = -1;
-                playerShift = 0;
             }
 
             bullet.reset(player.x + playerShift, player.y + (player.height / 2));
@@ -79,8 +88,10 @@ WADWeaponGatling.prototype.shoot = function(player){
         }
     }
 
-    if(this.overheating >= 100)
+    if(this.overheating >= 100) {
         this.cantShoot = true;
+        // this.game.shake();
+    }
 
     // Fire cooldown checker
     if(this.game.time.now > this.lastShot + this.firerate) {
@@ -156,10 +167,6 @@ WADWeaponBow.prototype.shoot = function(player){
     }
 };
 
-WADWeaponBow.prototype.special = function(player){
-
-};
-
 WADWeaponBow.prototype.update = function()
 {
 
@@ -191,8 +198,10 @@ WADWeaponShotgun.prototype.shoot = function(player){
             bullet.reset(this.x, this.y + (this.height / 2));
             var side = 1;
 
-            if(player.facing == "left")
+            if(player.facing == "left") {
             	side = -1;
+            }
+
             bullet.body.velocity.x = side * this.bullet_velocity;
 
             this.isReadyToFire = false;

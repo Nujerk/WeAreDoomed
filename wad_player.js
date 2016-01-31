@@ -1,6 +1,6 @@
-PLAYER_MOVE_VELOCITY 	= 250;
-PLAYER_JUMP_VELOCITY 	= -500;
-PLAYER_INITIAL_LIFE 	= 1000;
+PLAYER_MOVE_VELOCITY  = 300;
+PLAYER_JUMP_VELOCITY  = -500;
+PLAYER_INITIAL_LIFE   = 1000;
 
 /**
  * WAD player class
@@ -138,6 +138,10 @@ WADPlayer.prototype.update = function() {
             this.game.state.restart();
         }
     }
+
+    if(!this.body.blocked.down) {
+        this.loadTexture('inAir');
+    }
 };
 
 WADPlayer.prototype.onBulletHit = function(bullet, enemy) {
@@ -198,11 +202,13 @@ WADPlayer.prototype.moveLeft = function(){
     if(!this.moving || this.facing != "left") {
         // DEBUG
         this.scale.x = -1;
-        this.loadTexture('run', 0);
-        this.animations.add('run');
-        this.animations.play('run', 13, true);
-        this.moving = true;
 		this.facing = "left";
+        if(!this.locked){
+            this.loadTexture('run', 0);
+            this.animations.add('run');
+            this.animations.play('run', 13, true);
+            this.moving = true;
+        }
     }
 
  //    if(this.facing != "left"){
@@ -217,16 +223,14 @@ WADPlayer.prototype.moveRight = function(){
     if(!this.moving || this.facing != "right") {
         // DEBUG
         this.scale.x = 1;
-        this.loadTexture('run', 0);
-        this.animations.add('run');
-        this.animations.play('run', 13, true);
-        this.moving = true;
 		this.facing = "right";
+        if(!this.locked) {
+            this.loadTexture('run', 0);
+            this.animations.add('run');
+            this.animations.play('run', 13, true);
+            this.moving = true;
+        }
     }
-
- //    if(this.facing != "right"){
- //        this.animations.play(this.rightAnimation);
-	// }
 };
 
 WADPlayer.prototype.stop = function(){

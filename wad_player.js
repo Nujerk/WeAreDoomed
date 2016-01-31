@@ -8,7 +8,7 @@ PLAYER_INITIAL_LIFE 	= 10;
 WADPlayer = function (game, x, y) {
 
     Phaser.Sprite.call(this, game, x, y, 'player');
-    
+
     this.facing = "right";
     this.locked = false;
     this.inputInitialized = false;
@@ -53,7 +53,6 @@ WADPlayer.prototype.constructor = WADPlayer;
  * Automatically called by World.update
  */
 WADPlayer.prototype.update = function() {
-
 	/// Player bullets damage enemies
     this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
 
@@ -88,12 +87,12 @@ WADPlayer.prototype.update = function() {
 		this.stop();
 	else if(this.downKey.isDown)
 		this.pickupWeapon();
-	
+
 	if(this.upKey.isDown)
 		this.aimUp();
 	else if(this.upKey.isUp)
 		this.aimReset();
-	
+
 	if(this.jumpKey.isDown)
 		this.jump();
 };

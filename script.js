@@ -24,6 +24,9 @@ GameTemplate.Game.prototype = {
         this.load.spritesheet('explosion', 'assets/newtest/explosion.png', 200, 200);
         this.load.spritesheet('explosion2', 'assets/newtest/explosion2.png', 200, 200);
 
+        this.load.atlasJSONHash('idle', 'assets/AnimLemmy/LemIdle/idle.png', 'assets/AnimLemmy/LemIdle/idle.json');
+        this.load.atlasJSONHash('run', 'assets/AnimLemmy/LemRun/run.png', 'assets/AnimLemmy/LemRun/run.json');
+
         // Particles
         this.load.image('blood', 'assets/newtest/blood.png');
     },
@@ -74,17 +77,6 @@ GameTemplate.Game.prototype = {
         map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
         // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
 
-        // var migo = this.add.sprite(300, 200, 'migo');
-
-        // //  Here we add a new animation called 'walk'
-        // //  Because we didn't give any other parameters it's going to make an animation from all available frames in the 'mummy' sprite sheet
-        // var walk = migo.animations.add('walk');
-
-        // //  And this starts the animation playing by using its key ("walk")
-        // //  30 is the frame rate (30fps)
-        // //  true means it will loop when it finishes
-        // migo.animations.play('walk', 10, true);
-
         // var explosion2 = this.add.sprite(800, 400, 'explosion2');
 
         // //  Here we add a new animation called 'walk'
@@ -131,5 +123,5 @@ GameTemplate.Game.prototype = {
         if(!enemy) {
             this.door.open = true;
         }
-    },
+    }
 }

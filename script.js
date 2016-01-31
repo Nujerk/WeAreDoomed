@@ -135,9 +135,4 @@ GameTemplate.Game.prototype = {
             this.door.open = true;
         }
     },
-
-    // shake: function() {
-    //     this.camera.x += 4;
-    //     this.camera.x -= 4;
-    // }
 }

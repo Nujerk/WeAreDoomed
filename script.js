@@ -30,6 +30,9 @@ GameTemplate.Game.prototype = {
 
         // Particles
         this.load.image('blood', 'assets/newtest/blood.png');
+
+        // Sounds
+        game.load.audio('explosion', 'assets/audio/SoundEffects/explosion.mp3');
     },
 
     create: function() {

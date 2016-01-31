@@ -38,13 +38,13 @@ WADEnemy4.prototype.constructor = WADEnemy4;
 WADEnemy4.prototype.update = function() {
     if(this.alive) {
         this.checkAggro();
-        this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
     }
+    this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
 };
 
 WADEnemy4.prototype.onBulletHit = function(player, bullet) {
     bullet.kill();
-    /*player.damage(1);*/
+    player.damage(1);
 };
 
 WADEnemy4.prototype.setPlayer = function(player) {

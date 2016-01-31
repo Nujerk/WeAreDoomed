@@ -36,7 +36,6 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
-
         // Keep original size
         this.input.onDown.add(function(){
             this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;

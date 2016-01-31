@@ -32,7 +32,10 @@ GameTemplate.Game.prototype = {
         this.load.image('blood', 'assets/newtest/blood.png');
 
         // Sounds
-        game.load.audio('explosion', 'assets/audio/SoundEffects/explosion.mp3');
+        this.load.audio('enemyDie', 'assets/sounds/enemy_die.mp3');
+        this.load.audio('enemyShoot', 'assets/sounds/enemy_shoot.mp3');
+        this.load.audio('heroShoot', 'assets/sounds/hero_shoot.mp3');
+        this.load.audio('heroSpecial', 'assets/sounds/hero_special.mp3');
     },
 
     create: function() {
@@ -108,6 +111,12 @@ GameTemplate.Game.prototype = {
         ev.initKeyboardEvent(
             'keydown', true, true, window, false, false, false, false, 13, 0);
         document.body.dispatchEvent(ev);
+
+        this.enemyDie = this.add.audio('enemyDie');
+        this.enemyShoot = this.add.audio('enemyShoot');
+        this.heroShoot = this.add.audio('heroShoot');
+        this.heroSpecial = this.add.audio('heroSpecial');
+        this.sound.setDecodedCallback([this.enemyDie, this.enemyShoot, this.heroShoot, this.heroSpecial], function(){}, this);
     },
 
     update: function() {

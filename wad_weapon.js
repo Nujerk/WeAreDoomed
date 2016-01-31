@@ -85,6 +85,7 @@ WADWeaponGatling.prototype.shoot = function(player){
             this.isReadyToFire = false;
             this.lastShot = player.game.time.now;
             this.overheating+= 2;
+            this.game.sound._sounds[2].play();
         }
     }
 
@@ -105,6 +106,7 @@ WADWeaponGatling.prototype.special = function(player){
 
     this.cantShoot = false;
     this.overheating = 0;
+    this.game.sound._sounds[3].play();
 };
 
 WADWeaponGatling.prototype.update = function(){

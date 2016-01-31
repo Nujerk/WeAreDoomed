@@ -93,6 +93,8 @@ WADPlayer.prototype.update = function() {
 	/// Player bullets damage enemies
     this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
 
+    this.game.physics.arcade.overlap(this.weapon.specialBullets, this.enemies, this.onBulletHit);
+
     /// Player and weapon collides together (so that player can pick them up)
     this.game.physics.arcade.overlap(this, this.weapons, this.onWeaponCollide);
 

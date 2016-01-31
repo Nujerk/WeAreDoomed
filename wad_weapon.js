@@ -18,7 +18,7 @@ WADWeaponGatling = function (game) {
     this.specialBullets = game.add.group()
     this.specialBullets.enableBody = true;
     this.specialBullets.physicsBodyType = Phaser.Physics.ARCADE;
-    this.specialBullets.createMultiple(30, 'bulletPlayer');
+    this.specialBullets.createMultiple(30, 'special');
     this.specialBullets.forEach(function(bullet){
         bullet.checkWorldBounds = true;
         bullet.outOfBoundsKill = true;
@@ -85,6 +85,7 @@ WADWeaponGatling.prototype.shoot = function(player){
             this.isReadyToFire = false;
             this.lastShot = player.game.time.now;
             this.overheating+= 2;
+            this.game.sound._sounds[2].play();
         }
     }
 
@@ -105,6 +106,25 @@ WADWeaponGatling.prototype.special = function(player){
 
     this.cantShoot = false;
     this.overheating = 0;
+
+    if(this.specialBullets.getFirstExists(false)) {
+        var bullet = this.specialBullets.getFirstExists(false);
+        bullet.anchor.setTo(0.5, 0.5);
+        bullet.animations.add('walk');
+        bullet.animations.play('walk', 20, true);
+        var side = 1;
+        var playerShift = player.width;
+        if(player.facing == "left")
+        {
+            side = -1;
+        }
+
+        bullet.reset(player.x + playerShift, player.y + (player.height / 2));
+
+
+        bullet.body.velocity.x = side * this.bullet_velocity;
+        this.game.sound._sounds[3].play();
+    }
 };
 
 WADWeaponGatling.prototype.update = function(){

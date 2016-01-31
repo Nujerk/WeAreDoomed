@@ -33,7 +33,10 @@ GameTemplate.Game.prototype = {
         this.load.image('blood', 'assets/newtest/blood.png');
 
         // Sounds
-        game.load.audio('explosion', 'assets/audio/SoundEffects/explosion.mp3');
+        this.load.audio('enemyDie', 'assets/sounds/enemy_die.mp3');
+        this.load.audio('enemyShoot', 'assets/sounds/enemy_shoot.mp3');
+        this.load.audio('heroShoot', 'assets/sounds/hero_shoot.mp3');
+        this.load.audio('heroSpecial', 'assets/sounds/hero_special.mp3');
     },
 
     create: function() {
@@ -90,17 +93,6 @@ GameTemplate.Game.prototype = {
         // //  30 is the frame rate (30fps)
         // //  true means it will loop when it finishes
         // explosion2.animations.play('walk', 24, true);
-/*
-        var special = this.add.sprite(800, 400, 'special');
-
-        //  Here we add a new animation called 'walk'
-        //  Because we didn't give any other parameters it's going to make an animation from all available frames in the 'mummy' sprite sheet
-        var walk = special.animations.add('walk');
-
-        //  And this starts the animation playing by using its key ("walk")
-        //  30 is the frame rate (30fps)
-        //  true means it will loop when it finishes
-        special.animations.play('walk', 20, true);*/
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
@@ -120,6 +112,12 @@ GameTemplate.Game.prototype = {
         ev.initKeyboardEvent(
             'keydown', true, true, window, false, false, false, false, 13, 0);
         document.body.dispatchEvent(ev);
+
+        this.enemyDie = this.add.audio('enemyDie');
+        this.enemyShoot = this.add.audio('enemyShoot');
+        this.heroShoot = this.add.audio('heroShoot');
+        this.heroSpecial = this.add.audio('heroSpecial');
+        this.sound.setDecodedCallback([this.enemyDie, this.enemyShoot, this.heroShoot, this.heroSpecial], function(){}, this);
     },
 
     update: function() {
@@ -137,9 +135,4 @@ GameTemplate.Game.prototype = {
             this.door.open = true;
         }
     },
-
-    // shake: function() {
-    //     this.camera.x += 4;
-    //     this.camera.x -= 4;
-    // }
 }

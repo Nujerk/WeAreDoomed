@@ -139,8 +139,6 @@ WADPlayer.prototype.onBulletHit = function(bullet, enemy) {
 };
 
 WADPlayer.prototype.hit = function(direction) {
-
-    console.log(direction);
     this.bloodEmitter.y = this.y + (this.height / 2);
 
     if(direction == "left") {

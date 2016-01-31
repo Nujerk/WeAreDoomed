@@ -83,7 +83,6 @@ GameTemplate.Game.prototype = {
         // Simulate a keyboard event to remap the gamepad when we load
         // the state, have fun with browser weird stuff !
         var ev = document.createEvent('KeyboardEvent');
-        console.log(ev);
         // Send key '13' (= enter)
         ev.initKeyboardEvent(
             'keydown', true, true, window, false, false, false, false, 13, 0);

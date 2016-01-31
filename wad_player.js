@@ -1,15 +1,19 @@
-PLAYER_MOVE_VELOCITY 	= 150;
+PLAYER_MOVE_VELOCITY 	= 250;
 PLAYER_JUMP_VELOCITY 	= -500;
-PLAYER_INITIAL_LIFE 	= 10;
+PLAYER_INITIAL_LIFE 	= 1000;
 
 /**
  * WAD player class
  */
 WADPlayer = function (game, x, y) {
 
-    Phaser.Sprite.call(this, game, x, y, 'player');
+    Phaser.Sprite.call(this, game, x, y, 'idle');
+
+    this.animations.add('idle');
+    this.animations.play('idle', 13, true);
 
     this.facing = "right";
+    this.moving = false;
     this.locked = false;
     this.inputInitialized = false;
     this.weapon = null;
@@ -63,6 +67,7 @@ WADPlayer.prototype.constructor = WADPlayer;
  */
 WADPlayer.prototype.update = function() {
 
+    // Do things on particles
     this.bloodEmitter.forEachExists(function(particle){
         var derJajaChoucroutte = 2;
 
@@ -82,6 +87,8 @@ WADPlayer.prototype.update = function() {
             particle.body.velocity.x = 0;
         }
     });
+
+    // this.game.debug.body(this);
 
 	/// Player bullets damage enemies
     this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
@@ -188,24 +195,49 @@ WADPlayer.prototype.moveLeft = function(){
 	if(!this.locked)
 		this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 
-	if(this.facing != "left"){
-		this.animations.play(this.leftAnimation);
+    if(!this.moving || this.facing != "left") {
+        // DEBUG
+        this.scale.x = -1;
+        this.loadTexture('run', 0);
+        this.animations.add('run');
+        this.animations.play('run', 13, true);
+        this.moving = true;
 		this.facing = "left";
-	}
+    }
+
+ //    if(this.facing != "left"){
+ //        this.animations.play(this.leftAnimation);
+	// }
 };
 
 WADPlayer.prototype.moveRight = function(){
 	if(!this.locked)
 		this.body.velocity.x = PLAYER_MOVE_VELOCITY;
 
-	if(this.facing != "right"){
-		this.animations.play(this.rightAnimation);
+    if(!this.moving || this.facing != "right") {
+        // DEBUG
+        this.scale.x = 1;
+        this.loadTexture('run', 0);
+        this.animations.add('run');
+        this.animations.play('run', 13, true);
+        this.moving = true;
 		this.facing = "right";
-	}
+    }
+
+ //    if(this.facing != "right"){
+ //        this.animations.play(this.rightAnimation);
+	// }
 };
 
 WADPlayer.prototype.stop = function(){
+    if(this.moving) {
+        this.loadTexture('idle');
+        this.animations.add('idle');
+        this.animations.play('idle', 3, true);
+    }
+
 	this.body.velocity.x = 0;
+    this.moving = false;
 };
 
 WADPlayer.prototype.jump = function(){

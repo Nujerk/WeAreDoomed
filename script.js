@@ -11,14 +11,21 @@ GameTemplate.Game.prototype = {
 
         this.load.image('enemy', 'assets/newtest/enemy.png');
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
+
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.image('bulletPlayer', 'assets/newtest/bullet_player.png');
+
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
+        this.load.spritesheet('door', 'assets/newtest/door.png', 35, 35);
+
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
         this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_2_resized.png');
         this.load.spritesheet('migo', 'assets/newtest/migo.png', 127.5, 107.5);
         this.load.spritesheet('explosion', 'assets/newtest/explosion.png', 200, 200);
         this.load.spritesheet('explosion2', 'assets/newtest/explosion2.png', 200, 200);
+
+        // Particles
+        this.load.image('blood', 'assets/newtest/blood.png');
     },
 
     create: function() {
@@ -38,7 +45,6 @@ GameTemplate.Game.prototype = {
         this.physics.arcade.gravity.y = 300;
 
         var map = this.add.tilemap("map");
-        map.addTilesetImage("enemy");
         map.addTilesetImage("test 1");
 
         this.layer = map.createLayer("Tile Layer 1");
@@ -54,6 +60,12 @@ GameTemplate.Game.prototype = {
                                                  "backgroundBuilding");
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
+
+        this.door = this.add.group();
+        this.door.enableBody = true;
+        map.createFromObjects('Objects', 7, 'door', 0, true, false, this.door);
+        this.door = this.door.children[0];
+        this.door.open = false;
 
         this.player = this.add.group();
         this.player.enableBody = true;
@@ -91,12 +103,31 @@ GameTemplate.Game.prototype = {
         this.player = this.player.children[0];
         this.backgroundShift = this.player.x;
         this.camera.follow(this.player);
-        // this.enemies.setAll('player', this.player);
+        this.enemies.setAll('player', this.player);
+
+
+        // Simulate a keyboard event to remap the gamepad when we load
+        // the state, have fun with browser weird stuff !
+        var ev = document.createEvent('KeyboardEvent');
+        // Send key '13' (= enter)
+        ev.initKeyboardEvent(
+            'keydown', true, true, window, false, false, false, false, 13, 0);
+        document.body.dispatchEvent(ev);
     },
 
     update: function() {
         this.background.x = this.camera.x;
         this.physics.arcade.collide(this.player, this.layer);
-        // background.tilePosition.x -= 2;
+        this.physics.arcade.collide(this.player.bloodEmitter, this.layer);
+        this.physics.arcade.overlap(this.player, this.door, function(){
+            if(this.door.open) {
+                this.state.restart();
+            }
+        }.bind(this));
+
+        var enemy = this.enemies.getFirstAlive();
+        if(!enemy) {
+            this.door.open = true;
+        }
     },
 }

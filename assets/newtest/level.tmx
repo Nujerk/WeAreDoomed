@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-up" width="85" height="36" tilewidth="30" tileheight="30" nextobjectid="13">
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="85" height="36" tilewidth="30" tileheight="30" nextobjectid="14">
  <tileset firstgid="1" name="test 1" tilewidth="30" tileheight="30" tilecount="4" columns="2">
   <image source="tileset_test1.png" width="60" height="60"/>
  </tileset>
@@ -8,6 +8,9 @@
  </tileset>
  <tileset firstgid="6" name="player" tilewidth="30" tileheight="30" tilecount="1" columns="1">
   <image source="player.png" width="30" height="30"/>
+ </tileset>
+ <tileset firstgid="7" name="door" tilewidth="30" tileheight="30" tilecount="1" columns="1">
+  <image source="door.png" width="30" height="30"/>
  </tileset>
  <layer name="Tile Layer 1" width="85" height="36" offsetx="70" offsety="70">
   <data encoding="csv">
@@ -54,5 +57,7 @@
   <object id="6" name="Enemy2" gid="5" x="570" y="990" width="30" height="30"/>
   <object id="7" name="Player" gid="6" x="240" y="990" width="30" height="30"/>
  </objectgroup>
- <objectgroup name="Objects" offsetx="70" offsety="70"/>
+ <objectgroup name="Objects" offsetx="70" offsety="70">
+  <object id="13" gid="7" x="2100" y="990" width="30" height="30"/>
+ </objectgroup>
 </map>

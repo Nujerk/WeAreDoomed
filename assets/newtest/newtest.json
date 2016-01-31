@@ -79,7 +79,23 @@
          "draworder":"topdown",
          "height":0,
          "name":"Objects",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":7,
+                 "height":30,
+                 "id":13,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30,
+                 "x":2100,
+                 "y":990
+                }],
          "offsetx":70,
          "offsety":70,
          "opacity":1,
@@ -89,7 +105,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":13,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "properties":
     {
@@ -140,6 +156,23 @@
          "imagewidth":30,
          "margin":0,
          "name":"player",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":30,
+         "tilewidth":30
+        }, 
+        {
+         "columns":1,
+         "firstgid":7,
+         "image":"door.png",
+         "imageheight":30,
+         "imagewidth":30,
+         "margin":0,
+         "name":"door",
          "properties":
             {
 

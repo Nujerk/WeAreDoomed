@@ -14,6 +14,7 @@ GameTemplate.Game.prototype = {
 
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.image('bulletPlayer', 'assets/newtest/bullet_player.png');
+        this.load.image('inAir', 'assets/AnimLemmy/LemJump/jump_stance.png');
 
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
         this.load.spritesheet('door', 'assets/newtest/door.png', 35, 35);
@@ -32,8 +33,7 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
-        // load plugins
-        this.juicy = this.game.plugins.add(Phaser.Plugin.Juicy);
+
         // Keep original size
         this.input.onDown.add(function(){
             this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
@@ -90,7 +90,7 @@ GameTemplate.Game.prototype = {
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
-        map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy4);
+        map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy2);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
 
         this.player.setAll('enemies', this.enemies);
@@ -98,7 +98,6 @@ GameTemplate.Game.prototype = {
         this.backgroundShift = this.player.x;
         this.camera.follow(this.player);
         this.enemies.setAll('player', this.player);
-
 
         // Simulate a keyboard event to remap the gamepad when we load
         // the state, have fun with browser weird stuff !
@@ -123,5 +122,10 @@ GameTemplate.Game.prototype = {
         if(!enemy) {
             this.door.open = true;
         }
-    }
+    },
+
+    // shake: function() {
+    //     this.camera.x += 4;
+    //     this.camera.x -= 4;
+    // }
 }

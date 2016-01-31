@@ -95,6 +95,12 @@ WADPlayer.prototype.update = function() {
 
 	if(this.jumpKey.isDown)
 		this.jump();
+
+    if(this.game.physics.arcade.isPaused){
+        if(this.specialKey.isDown) {
+            this.game.state.restart();
+        }
+    }
 };
 
 WADPlayer.prototype.onBulletHit = function(bullet, enemy) {
@@ -199,12 +205,18 @@ WADPlayer.prototype.aimReset = function(){
 
 WADPlayer.prototype.playerExplode = function(){
 	/// End Game
-	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+	var style_2 = { font: "bold 25px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
 
     //  The Text is positioned at 0, 100
     text = this.game.add.text(0, 0, "YOU DIED. CTHULU RULES THE EARTH.", style);
     text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+    text_2 = this.game.add.text(0, 0, "PRESS B TO RESTART", style_2);
+
+    // Pause the game and wait the player to press on special key button
+    this.game.physics.arcade.isPaused=true;
 
     //  We'll set the bounds to be from x0, y100 and be 800px wide by 100px high
     text.setTextBounds(50, 100, 600, 100);
+    text_2.setTextBounds(50, 200, 600, 100);
 };

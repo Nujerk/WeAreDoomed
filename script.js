@@ -24,6 +24,7 @@ GameTemplate.Game.prototype = {
         this.load.spritesheet('migo', 'assets/newtest/migo.png', 127.5, 107.5);
         this.load.spritesheet('explosion', 'assets/newtest/explosion.png', 200, 200);
         this.load.spritesheet('explosion2', 'assets/newtest/explosion2.png', 200, 200);
+        this.load.spritesheet('special', 'assets/newtest/special.png', 200, 85);
 
         this.load.atlasJSONHash('idle', 'assets/AnimLemmy/LemIdle/idle.png', 'assets/AnimLemmy/LemIdle/idle.json');
         this.load.atlasJSONHash('run', 'assets/AnimLemmy/LemRun/run.png', 'assets/AnimLemmy/LemRun/run.json');
@@ -92,6 +93,17 @@ GameTemplate.Game.prototype = {
         // //  30 is the frame rate (30fps)
         // //  true means it will loop when it finishes
         // explosion2.animations.play('walk', 24, true);
+/*
+        var special = this.add.sprite(800, 400, 'special');
+
+        //  Here we add a new animation called 'walk'
+        //  Because we didn't give any other parameters it's going to make an animation from all available frames in the 'mummy' sprite sheet
+        var walk = special.animations.add('walk');
+
+        //  And this starts the animation playing by using its key ("walk")
+        //  30 is the frame rate (30fps)
+        //  true means it will loop when it finishes
+        special.animations.play('walk', 20, true);*/
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;

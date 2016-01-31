@@ -7,6 +7,9 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
+        this.musicBg = this.add.audio('zik');
+        this.musicBg.loopFull();
+
         // Keep original size
         this.input.onDown.add(function(){
             this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
@@ -69,10 +72,13 @@ GameTemplate.Game.prototype = {
 
         // Add sounds
         this.enemyDie = this.add.audio('enemyDie');
+        this.enemyDie.allowMultiple = true;
         this.enemyShoot = this.add.audio('enemyShoot');
+        this.enemyShoot.allowMultiple = true;
         this.heroShoot = this.add.audio('heroShoot');
+        this.heroShoot.allowMultiple = true;
         this.heroSpecial = this.add.audio('heroSpecial');
-        this.sound.setDecodedCallback([this.enemyDie, this.enemyShoot, this.heroShoot, this.heroSpecial], function(){}, this);
+        this.sound.setDecodedCallback([this.enemyDie, this.musicBg, this.enemyShoot, this.heroShoot, this.heroSpecial], function(){}, this);
     },
 
     update: function() {
@@ -81,6 +87,7 @@ GameTemplate.Game.prototype = {
         this.physics.arcade.collide(this.player.bloodEmitter, this.layer);
         this.physics.arcade.overlap(this.player, this.door, function(){
             if(this.door.open) {
+                this.musicBg.stop();
                 this.state.start("Game");
             }
         }.bind(this));

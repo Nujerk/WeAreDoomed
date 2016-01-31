@@ -65,7 +65,7 @@ WADEnemy2.prototype.damage = function(amount) {
 
             var walk = explosion2.animations.add('walk');
             explosion2.animations.play('walk', 24, false, true);
-            this.game.sound._sounds[0].play();
+            this.game.sound._sounds[2].play();
         }
     }
     return this;
@@ -134,7 +134,7 @@ WADEnemy2.prototype.fire = function(side){
 
             this.isReadyToFire = false;
             this.lastShot = this.game.time.now;
-            this.game.sound._sounds[1].play();
+            this.game.sound._sounds[2].play();
         }
     }
 

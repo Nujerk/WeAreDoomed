@@ -50,6 +50,7 @@ GameTemplate.Preloader.prototype = {
         this.load.audio('enemyShoot', 'assets/sounds/enemy_shoot.mp3');
         this.load.audio('heroShoot', 'assets/sounds/hero_shoot.mp3');
         this.load.audio('heroSpecial', 'assets/sounds/hero_special.mp3');
+        this.load.audio('zik', 'assets/music/zik.mp3');
 
         // Add sounds
         // this.enemyDie = this.add.audio('enemyDie');
@@ -75,7 +76,7 @@ GameTemplate.Preloader.prototype = {
         //  If you don't have any music in your game then put the game.state.start line into the create function and delete
         //  the update function completely.
 
-        if (this.cache.isSoundDecoded('enemyDie') && this.cache.isSoundDecoded('enemyShoot') && this.cache.isSoundDecoded('heroShoot') && this.cache.isSoundDecoded('heroSpecial') && this.ready == false) {
+        if (this.cache.isSoundDecoded('enemyDie') && this.cache.isSoundDecoded('zik') && this.cache.isSoundDecoded('enemyShoot') && this.cache.isSoundDecoded('heroShoot') && this.cache.isSoundDecoded('heroSpecial') && this.ready == false) {
             this.ready = true;
             this.state.start('Game');
         }

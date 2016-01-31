@@ -26,6 +26,8 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
+        // load plugins
+        this.juicy = this.game.plugins.add(Phaser.Plugin.Juicy);
         // Keep original size
         this.input.onDown.add(function(){
             this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;

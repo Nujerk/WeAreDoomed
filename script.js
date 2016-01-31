@@ -11,9 +11,13 @@ GameTemplate.Game.prototype = {
 
         this.load.image('enemy', 'assets/newtest/enemy.png');
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
+
         this.load.image('bullet', 'assets/newtest/bullet.png');
         this.load.image('bulletPlayer', 'assets/newtest/bullet_player.png');
+
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
+        this.load.spritesheet('door', 'assets/newtest/door.png', 35, 35);
+
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
         this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_resized.png');
     },
@@ -35,9 +39,7 @@ GameTemplate.Game.prototype = {
         this.physics.arcade.gravity.y = 300;
 
         var map = this.add.tilemap("map");
-        map.addTilesetImage("enemy");
         map.addTilesetImage("test 1");
-
 
         this.layer = map.createLayer("Tile Layer 1");
         map.setCollisionBetween(1, 10000, true, "Tile Layer 1");
@@ -53,11 +55,16 @@ GameTemplate.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
+        this.door = this.add.group();
+        this.door.enableBody = true;
+        map.createFromObjects('Objects', 7, 'door', 0, true, false, this.door);
+        this.door = this.door.children[0];
+        this.door.open = false;
+
         this.player = this.add.group();
         this.player.enableBody = true;
         map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
         // map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player);
-
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
@@ -68,10 +75,30 @@ GameTemplate.Game.prototype = {
         this.player = this.player.children[0];
         this.camera.follow(this.player);
         this.enemies.setAll('player', this.player);
+
+
+        // Simulate a keyboard event to remap the gamepad when we load
+        // the state, have fun with browser weird stuff !
+        var ev = document.createEvent('KeyboardEvent');
+        console.log(ev);
+        // Send key '13' (= enter)
+        ev.initKeyboardEvent(
+            'keydown', true, true, window, false, false, false, false, 13, 0);
+        document.body.dispatchEvent(ev);
+
     },
 
     update: function() {
         this.physics.arcade.collide(this.player, this.layer);
-        // background.tilePosition.x -= 2;
+        this.physics.arcade.overlap(this.player, this.door, function(){
+            if(this.door.open) {
+                this.state.restart();
+            }
+        }.bind(this));
+
+        var enemy = this.enemies.getFirstAlive();
+        if(!enemy) {
+            this.door.open = true;
+        }
     },
 }

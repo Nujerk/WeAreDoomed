@@ -93,17 +93,6 @@ GameTemplate.Game.prototype = {
         // //  30 is the frame rate (30fps)
         // //  true means it will loop when it finishes
         // explosion2.animations.play('walk', 24, true);
-/*
-        var special = this.add.sprite(800, 400, 'special');
-
-        //  Here we add a new animation called 'walk'
-        //  Because we didn't give any other parameters it's going to make an animation from all available frames in the 'mummy' sprite sheet
-        var walk = special.animations.add('walk');
-
-        //  And this starts the animation playing by using its key ("walk")
-        //  30 is the frame rate (30fps)
-        //  true means it will loop when it finishes
-        special.animations.play('walk', 20, true);*/
 
         this.enemies = this.add.group();
         this.enemies.enableBody = true;

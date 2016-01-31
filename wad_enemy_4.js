@@ -24,7 +24,7 @@ WADEnemy4 = function (game, x, y) {
 
     this.isReadyToFire = true;
     this.lastShot = 0;
-    this.firerate = 200;
+    this.firerate = 1600;
     this.bullet_velocity = 500;
     this.range = this.game.rnd.integerInRange(250, 270);
 };
@@ -39,11 +39,12 @@ WADEnemy4.prototype.update = function() {
     if(this.alive) {
         this.checkAggro();
     }
-    this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit);
+    this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit, null, this);
 };
 
 WADEnemy4.prototype.onBulletHit = function(player, bullet) {
     bullet.kill();
+    player.hit(this.facing);
     player.damage(1);
 };
 
@@ -59,9 +60,11 @@ WADEnemy4.prototype.checkAggro = function() {
         // Check if player is on left or right
         if(this.player.x > this.x) {
             var side = 1;
+            this.facing = "right";
         } else {
             // Player on left
             var side= -1;
+            this.facing = "left";
         }
 
         // If player is in range we fire else we try to reach the range value

@@ -5,16 +5,6 @@ ENEMY_MOVE_VELOCITY = 150;
  */
 WADEnemy2 = function (game, x, y) {
 
-    // var migo = this.add.sprite(300, 200, 'migo');
-    // //  Here we add a new animation called 'walk'
-    // //  Because we didn't give any other parameters it's going to make an animation from all available frames in the 'mummy' sprite sheet
-    // this.animations.add('walk');
-
-    // //  And this starts the animation playing by using its key ("walk")
-    // //  30 is the frame rate (30fps)
-    // //  true means it will loop when it finishes
-    // migo.animations.play('walk', 10, true);
-
     Phaser.Sprite.call(this, game, x, y, 'migo');
     this.animations.add('walk');
     this.animations.play('walk', 10, true);

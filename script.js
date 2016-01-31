@@ -92,6 +92,7 @@ GameTemplate.Game.prototype = {
 
     update: function() {
         this.physics.arcade.collide(this.player, this.layer);
+        this.physics.arcade.collide(this.player.bloodEmitter, this.layer);
         this.physics.arcade.overlap(this.player, this.door, function(){
             if(this.door.open) {
                 this.state.restart();

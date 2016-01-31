@@ -20,6 +20,9 @@ GameTemplate.Game.prototype = {
 
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
         this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_resized.png');
+
+        // Particles
+        this.load.image('blood', 'assets/newtest/blood.png');
     },
 
     create: function() {
@@ -85,7 +88,6 @@ GameTemplate.Game.prototype = {
         ev.initKeyboardEvent(
             'keydown', true, true, window, false, false, false, false, 13, 0);
         document.body.dispatchEvent(ev);
-
     },
 
     update: function() {

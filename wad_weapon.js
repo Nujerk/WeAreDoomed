@@ -8,7 +8,7 @@ WADWeaponGatling = function (game) {
     this.game = game;
     this.bullets.enableBody = true;
     this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    this.bullets.createMultiple(30, 'bullet');
+    this.bullets.createMultiple(30, 'bulletPlayer');
     this.bullets.forEach(function(bullet){
         bullet.checkWorldBounds = true;
         bullet.outOfBoundsKill = true;
@@ -37,13 +37,13 @@ WADWeaponGatling = function (game) {
     {
         if(this.overheating > 0 && (this.game.time.now - this.lastShot) > 500 )
         {
-            this.overheating -= 1; 
+            this.overheating -= 1;
         }
 
         if(this.overheating < 0)
             this.overheating = 0;
     };
-    
+
     //  Set a TimerEvent to occur after 2 seconds
     this.overheatingTimer.loop(1000, l_TimerFunction, this);
 
@@ -67,7 +67,7 @@ WADWeaponGatling.prototype.shoot = function(player){
             }
 
             bullet.reset(player.x + playerShift, player.y + (player.height / 2));
-            
+
             if(player.isAimingUp)
                 bullet.body.velocity.y = -300;
 
@@ -105,7 +105,7 @@ WADWeaponGatling.prototype.update = function(){
 
         if(this.overheating <= 50)
         {
-            this.cantShoot = false;    
+            this.cantShoot = false;
         }
         else
         {

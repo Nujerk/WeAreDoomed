@@ -12,6 +12,7 @@ GameTemplate.Game.prototype = {
         this.load.image('enemy', 'assets/newtest/enemy.png');
         this.load.image('test 1', 'assets/newtest/tileset_test1.png');
         this.load.image('bullet', 'assets/newtest/bullet.png');
+        this.load.image('bulletPlayer', 'assets/newtest/bullet_player.png');
         this.load.spritesheet('player', 'assets/newtest/player.png', 35, 35);
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
         this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_resized.png');
@@ -66,7 +67,7 @@ GameTemplate.Game.prototype = {
         this.player.setAll('enemies', this.enemies);
         this.player = this.player.children[0];
         this.camera.follow(this.player);
-        // this.enemies.setAll('player', this.player);
+        this.enemies.setAll('player', this.player);
     },
 
     update: function() {

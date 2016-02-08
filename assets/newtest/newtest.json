@@ -19,38 +19,6 @@
          "name":"Livable",
          "objects":[
                 {
-                 "gid":5,
-                 "height":30,
-                 "id":5,
-                 "name":"Enemy1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":1500,
-                 "y":960
-                }, 
-                {
-                 "gid":5,
-                 "height":30,
-                 "id":6,
-                 "name":"Enemy2",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":1650,
-                 "y":960
-                }, 
-                {
                  "gid":6,
                  "height":30,
                  "id":7,
@@ -67,9 +35,9 @@
                  "y":990
                 }, 
                 {
-                 "gid":5,
+                 "gid":8,
                  "height":30,
-                 "id":14,
+                 "id":38,
                  "name":"Enemy2",
                  "properties":
                     {
@@ -79,29 +47,13 @@
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":1890,
-                 "y":960
+                 "x":990,
+                 "y":990
                 }, 
                 {
-                 "gid":5,
+                 "gid":8,
                  "height":30,
-                 "id":15,
-                 "name":"Enemy1",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":1740,
-                 "y":960
-                }, 
-                {
-                 "gid":5,
-                 "height":30,
-                 "id":16,
+                 "id":39,
                  "name":"Enemy2",
                  "properties":
                     {
@@ -111,13 +63,61 @@
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":1980,
-                 "y":960
+                 "x":1080,
+                 "y":990
+                }, 
+                {
+                 "gid":8,
+                 "height":30,
+                 "id":40,
+                 "name":"Enemy2",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30,
+                 "x":1410,
+                 "y":990
+                }, 
+                {
+                 "gid":8,
+                 "height":30,
+                 "id":41,
+                 "name":"Enemy2",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30,
+                 "x":1500,
+                 "y":990
+                }, 
+                {
+                 "gid":8,
+                 "height":30,
+                 "id":43,
+                 "name":"Enemy2",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30,
+                 "x":1860,
+                 "y":990
                 }, 
                 {
                  "gid":5,
                  "height":30,
-                 "id":17,
+                 "id":49,
                  "name":"Enemy1",
                  "properties":
                     {
@@ -128,28 +128,12 @@
                  "visible":true,
                  "width":30,
                  "x":1830,
-                 "y":960
+                 "y":780
                 }, 
                 {
                  "gid":5,
                  "height":30,
-                 "id":18,
-                 "name":"Enemy2",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":1590,
-                 "y":960
-                }, 
-                {
-                 "gid":5,
-                 "height":30,
-                 "id":19,
+                 "id":50,
                  "name":"Enemy1",
                  "properties":
                     {
@@ -159,29 +143,13 @@
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":1440,
-                 "y":960
+                 "x":1650,
+                 "y":660
                 }, 
                 {
                  "gid":5,
                  "height":30,
-                 "id":20,
-                 "name":"Enemy2",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":2190,
-                 "y":960
-                }, 
-                {
-                 "gid":5,
-                 "height":30,
-                 "id":21,
+                 "id":51,
                  "name":"Enemy1",
                  "properties":
                     {
@@ -191,29 +159,13 @@
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":2040,
-                 "y":960
+                 "x":1320,
+                 "y":750
                 }, 
                 {
                  "gid":5,
                  "height":30,
-                 "id":22,
-                 "name":"Enemy2",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":30,
-                 "x":2280,
-                 "y":960
-                }, 
-                {
-                 "gid":5,
-                 "height":30,
-                 "id":23,
+                 "id":52,
                  "name":"Enemy1",
                  "properties":
                     {
@@ -223,8 +175,8 @@
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":2130,
-                 "y":960
+                 "x":1170,
+                 "y":630
                 }],
          "offsetx":70,
          "offsety":70,
@@ -244,7 +196,7 @@
                  "gid":7,
                  "height":30,
                  "id":13,
-                 "name":"",
+                 "name":"Door",
                  "properties":
                     {
 
@@ -254,7 +206,7 @@
                  "visible":true,
                  "width":30,
                  "x":2100,
-                 "y":960
+                 "y":990
                 }],
          "offsetx":70,
          "offsety":70,
@@ -265,7 +217,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":24,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "properties":
     {
@@ -339,6 +291,23 @@
             },
          "spacing":0,
          "tilecount":1,
+         "tileheight":30,
+         "tilewidth":30
+        }, 
+        {
+         "columns":1,
+         "firstgid":8,
+         "image":"enemy2.png",
+         "imageheight":30,
+         "imagewidth":30,
+         "margin":0,
+         "name":"enemy2",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":4,
          "tileheight":30,
          "tilewidth":30
         }],

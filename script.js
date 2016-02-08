@@ -20,7 +20,7 @@ GameTemplate.Game.prototype = {
         // });
 
         this.musicBg = this.add.audio('zik');
-        // this.musicBg.loopFull();
+        //this.musicBg.loopFull();
 
         // Keep original size
         this.input.onDown.add(function(){
@@ -66,6 +66,7 @@ GameTemplate.Game.prototype = {
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy2);
+        map.createFromObjects('Livable', 8, 'enemy2', 0, true, false, this.enemies, WADEnemy4);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
 
         this.player.setAll('enemies', this.enemies);

@@ -7,8 +7,20 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
+        // this.plugins.cameraShake = this.plugins.add(Phaser.Plugin.CameraShake);
+        console.log(this);
+        this.game.plugins.cameraShake = this.game.plugins.add(new Phaser.Plugin.CameraShake(this));
+        this.game.plugins.cameraShake.setup({
+            shakeRange: 10,
+            shakeCount: 10,
+            shakeInterval: 20,
+            randomShake: false,
+            randomizeInterval: true,
+            shakeAxis: 'xy'
+        });
+
         this.musicBg = this.add.audio('zik');
-        this.musicBg.loopFull();
+        // this.musicBg.loopFull();
 
         // Keep original size
         this.input.onDown.add(function(){

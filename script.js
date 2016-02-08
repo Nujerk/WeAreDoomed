@@ -9,15 +9,15 @@ GameTemplate.Game.prototype = {
     create: function() {
         // this.plugins.cameraShake = this.plugins.add(Phaser.Plugin.CameraShake);
         console.log(this);
-        this.game.plugins.cameraShake = this.game.plugins.add(new Phaser.Plugin.CameraShake(this));
-        this.game.plugins.cameraShake.setup({
-            shakeRange: 10,
-            shakeCount: 10,
-            shakeInterval: 20,
-            randomShake: false,
-            randomizeInterval: true,
-            shakeAxis: 'xy'
-        });
+        // this.game.plugins.cameraShake = this.game.plugins.add(new Phaser.Plugin.CameraShake(this));
+        // this.game.plugins.cameraShake.setup({
+        //     shakeRange: 10,
+        //     shakeCount: 10,
+        //     shakeInterval: 20,
+        //     randomShake: false,
+        //     randomizeInterval: true,
+        //     shakeAxis: 'xy'
+        // });
 
         this.musicBg = this.add.audio('zik');
         // this.musicBg.loopFull();
@@ -76,10 +76,10 @@ GameTemplate.Game.prototype = {
 
         // Simulate a keyboard event to remap the gamepad when we load
         // the state, have fun with browser weird stuff !
-        var ev = document.createEvent('KeyboardEvent');
-        // Send key '13' (= enter)
-        ev.initKeyboardEvent(
-            'keydown', true, true, window, false, false, false, false, 13, 0);
+        var keyEvDict = new Object();
+        keyEvDict.key = 'Enter';
+        var ev = new KeyboardEvent('KeyboardEvent', keyEvDict);
+
         document.body.dispatchEvent(ev);
 
         // Add sounds

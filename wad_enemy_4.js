@@ -69,45 +69,58 @@ WADEnemy4.prototype.damage = function(amount) {
             this.game.sound._sounds[2].play();
             // this.game.plugins.cameraShake.shake();
 
-            this.game.camera.unfollow();
-            this.game.camera.bounds = null;
             this.shakeStep = 0;
             this.shakeCount = 20;
-            var position = this.game.camera.position;
-            if(this.shake_timer == undefined)
+            if(this.shake_timer == null || !this.shake_timer.running)
             {
                 this.shake_timer = this.game.time.create(false);
-                this.shake_timer.loop(50, function(){
+                this.shake_timer.loop(50, function()
+                {
+
+                    var halfCamera = 1920 / 2;
+                    var sceneWidth = 2320 + 240;
+
+                    if(this.player.x >= halfCamera && this.player.x <= sceneWidth - halfCamera)
+                        this.game.camera.x = this.player.x - halfCamera;
+                    else if(this.player.x < halfCamera)
+                        this.game.camera.x = 0;
+                    else
+                        this.game.camera.x = sceneWidth - 1920;
+                    this.game.camera.y = 0
+
                     if(this.shakeCount <= 0)
                     {
-                        this.game.camera.bounds = new Phaser.Rectangle(0, 0, 1920, 1080)
-                        this.game.camera.x = 0;
-                        this.game.camera.y = 0;
-                        this.game.camera.follow(this.game.player);
                         this.shake_timer.stop();
                         this.shake_timer = null;
+                        this.game.shaking = false;
                         return;
                     }
+
+                    this.game.shaking = true;
 
                     switch(this.shakeStep)
                     {
                         case 0 :
                             // up right
-                            this.game.camera.focusOnXY(position.x+10,position.y+10);
+                            this.game.camera.x = this.game.camera.x+10
+                            this.game.camera.y = 10;
                             this.shakeStep = 1;
                             break;
                         case 1 :
                             // center down
-                            this.game.camera.focusOnXY(position.x,position.y+5);
+                            this.game.camera.x = this.game.camera.x+2
+                            this.game.camera.y = 5;
                             this.shakeStep = 2;
                             break;
                         case 2 :
                             // up left
-                            this.game.camera.focusOnXY(position.x-10,position.y+10);
+                            this.game.camera.x = this.game.camera.x-10
+                            this.game.camera.y = 8;
                             this.shakeStep = 3;
                             break;
                         case 3 :
-                            this.game.camera.focusOnXY(position.x,position.y);
+                            this.game.camera.x = this.game.camera.x-2
+                            this.game.camera.y = 5;
                             this.shakeStep = 0;
                             break;
                     }

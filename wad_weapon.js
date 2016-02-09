@@ -120,11 +120,12 @@ WADWeaponGatling.prototype.special = function(player){
         }
 
         bullet.reset(player.x + playerShift, player.y + (player.height / 2));
-
+        bullet.scale.x = side;
 
         bullet.body.velocity.x = side * this.bullet_velocity;
         this.game.sound._sounds[4].play();
 
+        // Shake it out, shake it out !
         this.shakeStep = 0;
         this.shakeCount = 20;
         var position = this.game.camera.position;

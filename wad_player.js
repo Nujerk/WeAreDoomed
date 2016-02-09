@@ -38,12 +38,10 @@ WADPlayer = function (game, x, y) {
 
     this.weapon = new WADWeaponGatling(game);
 
+    //  Life display
 	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
-    //  The Text is positioned at 0, 100
     this.healthtext = this.game.add.text(10, 5, this.health + "PV" , style);
     this.healthtext.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
-
-    //  We'll set the bounds to be from x0, y100 and be 800px wide by 100px high
     this.healthtext.fixedToCamera = true;
     this.healthtext.cameraOffset.setTo(10, 5);
 
@@ -69,20 +67,20 @@ WADPlayer.prototype.update = function() {
 
     // Do things on particles
     this.bloodEmitter.forEachExists(function(particle){
-        var derJajaChoucroutte = 2;
+        var particleVelocity = 2;
 
         if(particle.body.angularVelocity > 0) {
-            particle.body.angularVelocity -= derJajaChoucroutte;
+            particle.body.angularVelocity -= particleVelocity;
         } else if(particle.body.angularVelocity < 0){
-            particle.body.angularVelocity += derJajaChoucroutte;
+            particle.body.angularVelocity += particleVelocity;
         } else {
             particle.body.angularVelocity = 0;
         }
 
         if(particle.body.velocity.x > 0) {
-            particle.body.velocity.x -= derJajaChoucroutte;
+            particle.body.velocity.x -= particleVelocity;
         } else if(particle.body.velocity.x < 0){
-            particle.body.velocity.x += derJajaChoucroutte;
+            particle.body.velocity.x += particleVelocity;
         } else {
             particle.body.velocity.x = 0;
         }
@@ -202,7 +200,6 @@ WADPlayer.prototype.moveLeft = function(){
 		this.body.velocity.x = -PLAYER_MOVE_VELOCITY;
 
     if(!this.moving || this.facing != "left") {
-        // DEBUG
         this.scale.x = -1;
 		this.facing = "left";
         if(!this.locked){
@@ -212,10 +209,6 @@ WADPlayer.prototype.moveLeft = function(){
             this.moving = true;
         }
     }
-
- //    if(this.facing != "left"){
- //        this.animations.play(this.leftAnimation);
-	// }
 };
 
 WADPlayer.prototype.moveRight = function(){

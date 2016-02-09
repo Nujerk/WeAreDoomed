@@ -35,6 +35,7 @@ GameTemplate.Preloader.prototype = {
         this.load.image('background', 'assets/newtest/Fond_montagne.png');
         this.load.image('backgroundBuilding', 'assets/newtest/Fond_bureau_2_resized.png');
         this.load.spritesheet('migo', 'assets/newtest/migo.png', 127.5, 107.5);
+        this.load.spritesheet('cultist', 'assets/newtest/cultist.png', 90, 190);
         this.load.spritesheet('explosion', 'assets/newtest/explosion.png', 200, 200);
         this.load.spritesheet('explosion2', 'assets/newtest/explosion2.png', 200, 200);
         this.load.spritesheet('special', 'assets/newtest/special.png', 200, 85);

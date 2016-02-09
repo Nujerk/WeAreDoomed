@@ -124,6 +124,55 @@ WADWeaponGatling.prototype.special = function(player){
 
         bullet.body.velocity.x = side * this.bullet_velocity;
         this.game.sound._sounds[4].play();
+
+        this.game.camera.unfollow();
+        this.game.camera.bounds = null;
+        this.shakeStep = 0;
+        this.shakeCount = 20;
+        var position = this.game.camera.position;
+        if(this.shake_timer == undefined)
+        {
+            this.shake_timer = this.game.time.create(false);
+            this.shake_timer.loop(50, function(){
+                if(this.shakeCount <= 0)
+                {
+                    this.game.camera.bounds = new Phaser.Rectangle(0, 0, 1920, 1080)
+                    this.game.camera.x = 0;
+                    this.game.camera.y = 0;
+                    this.game.camera.follow(player);
+                    this.shake_timer.stop();
+                    this.shake_timer = null;
+                    return;
+                }
+
+                switch(this.shakeStep)
+                {
+                    case 0 :
+                        // up right
+                        this.game.camera.focusOnXY(position.x+10,position.y+10);
+                        this.shakeStep = 1;
+                        break;
+                    case 1 :
+                        // center down
+                        this.game.camera.focusOnXY(position.x,position.y+5);
+                        this.shakeStep = 2;
+                        break;
+                    case 2 :
+                        // up left
+                        this.game.camera.focusOnXY(position.x-10,position.y+10);
+                        this.shakeStep = 3;
+                        break;
+                    case 3 :
+                        this.game.camera.focusOnXY(position.x,position.y);
+                        this.shakeStep = 0;
+                        break;
+                }
+
+                this.shakeCount--;
+
+            }, this);
+            this.shake_timer.start();
+        }
     }
 };
 

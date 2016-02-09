@@ -191,8 +191,11 @@ WADEnemy2.prototype.fire = function(side){
         if(this.bullets.getFirstExists(false)) {
             var bullet = this.bullets.getFirstExists(false);
             bullet.anchor.setTo(0.5, 0.5);
-            bullet.reset(this.x + this.width, this.y + (this.height / 2));
-            bullet.body.velocity.x = side * this.bullet_velocity;
+            if(this.facing == "right")
+                bullet.reset(this.x + this.width - 21, this.y + 57);
+            else
+                bullet.reset(this.x + 21, this.y + 57);
+            this.game.physics.arcade.moveToObject(bullet, this.player, this.bullet_velocity)
 
             this.isReadyToFire = false;
             this.lastShot = this.game.time.now;

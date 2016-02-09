@@ -192,8 +192,11 @@ WADEnemy4.prototype.fire = function(side){
     if(this.isReadyToFire) {
         if(this.bullets.getFirstExists(false)) {
             var bullet = this.bullets.getFirstExists(false);
-            bullet.anchor.setTo(0.5, 0.9);
-            bullet.reset(this.x + this.width, this.y + (this.height / 2));
+            bullet.anchor.setTo(0.5, 0.5);
+            if(this.facing == "right")
+                bullet.reset(this.x + 151, this.y + 45);
+            else
+                bullet.reset(this.x + 29, this.y + 45);
             bullet.body.velocity.x = side * this.bullet_velocity;
 
             this.isReadyToFire = false;

@@ -56,12 +56,13 @@ WADEnemy4.prototype.damage = function(amount) {
     if (this.alive) {
         this.health -= amount;
 
+        // Kill the enemy
         if (this.health <= 0) {
             this.kill();
             if(this.facing == "right") {
-                var explosion2 = this.game.add.sprite(this.x + this.width, this.y - (this.height / 2), 'explosion2');
+                var explosion2 = this.game.add.sprite(this.x + this.width, this.y, 'explosion2');
             } else {
-                var explosion2 = this.game.add.sprite(this.x, this.y - (this.height / 2), 'explosion2');
+                var explosion2 = this.game.add.sprite(this.x - (this.width / 2), this.y, 'explosion2');
             }
 
             var walk = explosion2.animations.add('walk');

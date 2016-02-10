@@ -7,18 +7,6 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
-        // this.plugins.cameraShake = this.plugins.add(Phaser.Plugin.CameraShake);
-        console.log(this);
-        // this.game.plugins.cameraShake = this.game.plugins.add(new Phaser.Plugin.CameraShake(this));
-        // this.game.plugins.cameraShake.setup({
-        //     shakeRange: 10,
-        //     shakeCount: 10,
-        //     shakeInterval: 20,
-        //     randomShake: false,
-        //     randomizeInterval: true,
-        //     shakeAxis: 'xy'
-        // });
-
         this.musicBg = this.add.audio('zik');
         //this.musicBg.loopFull();
 
@@ -53,16 +41,19 @@ GameTemplate.Game.prototype = {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
+        // Add the door
         this.door = this.add.group();
         this.door.enableBody = true;
         map.createFromObjects('Objects', 7, 'door', 0, true, false, this.door);
         this.door = this.door.children[0];
         this.door.open = false;
 
+        // Add the player
         this.player = this.add.group();
         this.player.enableBody = true;
         map.createFromObjects('Livable', 6, 'player', 0, true, false, this.player, WADPlayer);
 
+        // Add all the enemies
         this.enemies = this.add.group();
         this.enemies.enableBody = true;
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy2);
@@ -80,7 +71,6 @@ GameTemplate.Game.prototype = {
         var keyEvDict = new Object();
         keyEvDict.key = 'Enter';
         var ev = new KeyboardEvent('KeyboardEvent', keyEvDict);
-
         document.body.dispatchEvent(ev);
 
         // Add sounds

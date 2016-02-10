@@ -8,7 +8,7 @@ GameTemplate.Game.prototype = {
 
     create: function() {
         this.musicBg = this.add.audio('zik');
-        //this.musicBg.loopFull();
+        this.musicBg.loopFull(0.4);
 
         // Keep original size
         this.input.onDown.add(function(){
@@ -44,7 +44,7 @@ GameTemplate.Game.prototype = {
         // Add the door
         this.door = this.add.group();
         this.door.enableBody = true;
-        map.createFromObjects('Objects', 7, 'door', 0, true, false, this.door);
+        map.createFromObjects('Objects', 7, 'door', 0, true, false, this.door, WADDoor);
         this.door = this.door.children[0];
         this.door.open = false;
 
@@ -59,6 +59,7 @@ GameTemplate.Game.prototype = {
         map.createFromObjects('Livable', 5, 'enemy', 0, true, false, this.enemies, WADEnemy2);
         map.createFromObjects('Livable', 8, 'enemy2', 0, true, false, this.enemies, WADEnemy4);
         this.enemies.callAll('setPlayer', this, this.player.children[0]);
+        this.door.setEnemies(this.enemies);
 
         this.player.setAll('enemies', this.enemies);
         this.player = this.player.children[0];
@@ -74,7 +75,7 @@ GameTemplate.Game.prototype = {
         document.body.dispatchEvent(ev);
 
         // Add sounds
-        this.enemyDie = this.add.audio('enemyDie');
+        this.enemyDie = this.add.audio('explosionSound');
         this.enemyDie.allowMultiple = true;
         this.enemyShoot = this.add.audio('enemyShoot');
         this.enemyShoot.allowMultiple = true;
@@ -109,10 +110,5 @@ GameTemplate.Game.prototype = {
                 this.state.start("Game");
             }
         }.bind(this));
-
-        var enemy = this.enemies.getFirstAlive();
-        if(!enemy) {
-            this.door.open = true;
-        }
     },
 }

@@ -12,7 +12,7 @@
  <tileset firstgid="7" name="door" tilewidth="30" tileheight="30" tilecount="1" columns="1">
   <image source="door.png" width="30" height="30"/>
  </tileset>
- <tileset firstgid="8" name="enemy2" tilewidth="30" tileheight="30" tilecount="4" columns="1">
+ <tileset firstgid="8" name="enemy2" tilewidth="30" tileheight="30" tilecount="1" columns="1">
   <image source="enemy2.png" width="30" height="30"/>
  </tileset>
  <layer name="Tile Layer 1" width="85" height="36" offsetx="70" offsety="70">
@@ -64,8 +64,8 @@
   <object id="43" name="Enemy2" gid="8" x="1860" y="990" width="30" height="30"/>
   <object id="49" name="Enemy1" gid="5" x="1830" y="780" width="30" height="30"/>
   <object id="50" name="Enemy1" gid="5" x="1650" y="660" width="30" height="30"/>
-  <object id="51" name="Enemy1" gid="5" x="1320" y="750" width="30" height="30"/>
-  <object id="52" name="Enemy1" gid="5" x="1170" y="630" width="30" height="30"/>
+  <object id="51" name="Enemy1" gid="5" x="1320" y="780" width="30" height="30"/>
+  <object id="52" name="Enemy1" gid="5" x="1170" y="660" width="30" height="30"/>
  </objectgroup>
  <objectgroup name="Objects" offsetx="70" offsety="70">
   <object id="13" name="Door" gid="7" x="2100" y="990" width="30" height="30"/>

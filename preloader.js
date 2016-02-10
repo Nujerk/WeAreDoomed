@@ -39,6 +39,7 @@ GameTemplate.Preloader.prototype = {
         this.load.spritesheet('explosion', 'assets/newtest/explosion.png', 200, 200);
         this.load.spritesheet('explosion2', 'assets/newtest/explosion2.png', 200, 200);
         this.load.spritesheet('special', 'assets/newtest/special.png', 200, 85);
+        this.load.spritesheet('teleporter', 'assets/newtest/teleporter.png', 111, 200);
 
         this.load.atlasJSONHash('idle', 'assets/AnimLemmy/LemIdle/idle.png', 'assets/AnimLemmy/LemIdle/idle.json');
         this.load.atlasJSONHash('run', 'assets/AnimLemmy/LemRun/run.png', 'assets/AnimLemmy/LemRun/run.json');
@@ -51,7 +52,8 @@ GameTemplate.Preloader.prototype = {
         this.load.audio('enemyShoot', 'assets/sounds/enemy_shoot.mp3');
         this.load.audio('heroShoot', 'assets/sounds/hero_shoot.mp3');
         this.load.audio('heroSpecial', 'assets/sounds/hero_special.mp3');
-        this.load.audio('zik', 'assets/music/zik.mp3');
+        this.load.audio('explosionSound', 'assets/sounds/EXPLOSIAAAA.mp3');
+        this.load.audio('zik', 'assets/music/zik2.mp3');
 
         // Add sounds
         // this.enemyDie = this.add.audio('enemyDie');

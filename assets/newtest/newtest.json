@@ -160,7 +160,7 @@
                  "visible":true,
                  "width":30,
                  "x":1320,
-                 "y":750
+                 "y":780
                 }, 
                 {
                  "gid":5,
@@ -176,7 +176,7 @@
                  "visible":true,
                  "width":30,
                  "x":1170,
-                 "y":630
+                 "y":660
                 }],
          "offsetx":70,
          "offsety":70,
@@ -307,7 +307,7 @@
 
             },
          "spacing":0,
-         "tilecount":4,
+         "tilecount":1,
          "tileheight":30,
          "tilewidth":30
         }],

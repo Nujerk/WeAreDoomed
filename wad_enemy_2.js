@@ -66,8 +66,8 @@ WADEnemy2.prototype.damage = function(amount) {
             var walk = explosion2.animations.add('walk');
             explosion2.animations.play('walk', 24, false, true);
             this.game.sound._sounds[2].play();
-            // this.game.plugins.cameraShake.shake();
 
+            // Shake it out, shake it out !
             this.shakeStep = 0;
             this.shakeCount = 20;
             var position = this.game.camera.position;

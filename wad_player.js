@@ -90,7 +90,6 @@ WADPlayer.prototype.update = function() {
 
 	/// Player bullets damage enemies
     this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
-
     this.game.physics.arcade.overlap(this.weapon.specialBullets, this.enemies, this.onBulletHit);
 
     /// Player and weapon collides together (so that player can pick them up)
@@ -102,6 +101,17 @@ WADPlayer.prototype.update = function() {
 
 	if(!this.inputInitialized)
 		return;
+
+    console.log(this.body.blocked.down);
+    console.log(this.key);
+
+    if(!this.body.blocked.down) {
+        this.loadTexture('inAir');
+    } else {
+        if(this.key == "inAir") {
+            this.stop();
+        }
+    }
 
 	if(this.lockKey.isDown)
 		this.lock();
@@ -137,10 +147,6 @@ WADPlayer.prototype.update = function() {
         if(this.specialKey.isDown) {
             this.game.state.restart();
         }
-    }
-
-    if(!this.body.blocked.down) {
-        this.loadTexture('inAir');
     }
 };
 
@@ -243,6 +249,7 @@ WADPlayer.prototype.jump = function(){
 	if(this.body.velocity.y != 0 || this.locked)
 		return;
 	this.body.velocity.y = PLAYER_JUMP_VELOCITY;
+    this.moving = true;
 };
 
 WADPlayer.prototype.shoot = function(){

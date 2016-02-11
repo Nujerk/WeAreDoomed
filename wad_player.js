@@ -102,17 +102,6 @@ WADPlayer.prototype.update = function() {
 	if(!this.inputInitialized)
 		return;
 
-    console.log(this.body.blocked.down);
-    console.log(this.key);
-
-    if(!this.body.blocked.down) {
-        this.loadTexture('inAir');
-    } else {
-        if(this.key == "inAir") {
-            this.stop();
-        }
-    }
-
 	if(this.lockKey.isDown)
 		this.lock();
 	else if(this.lockKey.isUp)
@@ -146,6 +135,15 @@ WADPlayer.prototype.update = function() {
     if(this.game.physics.arcade.isPaused){
         if(this.specialKey.isDown) {
             this.game.state.restart();
+        }
+    }
+
+    if(!this.body.blocked.down) {
+        this.loadTexture('inAir');
+        this.moving = true;
+    } else {
+        if(this.key == "inAir") {
+            this.stop();
         }
     }
 };
@@ -235,7 +233,7 @@ WADPlayer.prototype.moveRight = function(){
 };
 
 WADPlayer.prototype.stop = function(){
-    if(this.moving) {
+    if(this.moving && this.body.blocked.down) {
         this.loadTexture('idle');
         this.animations.add('idle');
         this.animations.play('idle', 3, true);

@@ -29,7 +29,7 @@ WADEnemy2 = function (game, x, y) {
     this.lastShot = 0;
     this.firerate = 1600;
     this.bullet_velocity = 500;
-    this.range = this.game.rnd.integerInRange(400, 500);
+    this.range = this.game.rnd.integerInRange(500, 600);
 };
 
 WADEnemy2.prototype = Object.create(Phaser.Sprite.prototype);
@@ -42,6 +42,7 @@ WADEnemy2.prototype.update = function() {
     if(this.alive) {
         this.checkAggro();
     }
+    // Make bullets of migo collide with the player
     this.game.physics.arcade.overlap(this.bullets, this.player, this.onBulletHit, null, this);
 };
 

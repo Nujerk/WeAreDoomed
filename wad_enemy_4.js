@@ -75,22 +75,17 @@ WADEnemy4.prototype.damage = function(amount) {
             if(this.shake_timer == null || !this.shake_timer.running)
             {
                 this.shake_timer = this.game.time.create(false);
-                this.shake_timer.loop(50, function()
-                {
+                this.shake_timer.loop(50, function() {
 
                     var halfCamera = 1920 / 2;
                     var sceneWidth = 2320 + 240;
 
                     if(this.player.x >= halfCamera && this.player.x <= sceneWidth - halfCamera)
                         this.game.camera.x = this.player.x - halfCamera;
-                    else if(this.player.x < halfCamera)
-                        this.game.camera.x = 0;
-                    else
-                        this.game.camera.x = sceneWidth - 1920;
+
                     this.game.camera.y = 0
 
-                    if(this.shakeCount <= 0)
-                    {
+                    if(this.shakeCount <= 0) {
                         this.shake_timer.stop();
                         this.shake_timer = null;
                         this.game.shaking = false;
@@ -99,8 +94,7 @@ WADEnemy4.prototype.damage = function(amount) {
 
                     this.game.shaking = true;
 
-                    switch(this.shakeStep)
-                    {
+                    switch(this.shakeStep) {
                         case 0 :
                             // up right
                             this.game.camera.x = this.game.camera.x+10

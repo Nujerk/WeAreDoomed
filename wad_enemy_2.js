@@ -29,7 +29,9 @@ WADEnemy2 = function (game, x, y) {
     this.lastShot = 0;
     this.firerate = 1600;
     this.bullet_velocity = 500;
-    this.range = this.game.rnd.integerInRange(500, 600);
+    this.MIN_RANGE = 500;
+    this.MAX_RANGE = 600;
+    this.range = this.game.rnd.integerInRange(this.MIN_RANGE, this.MAX_RANGE);
 };
 
 WADEnemy2.prototype = Object.create(Phaser.Sprite.prototype);
@@ -72,23 +74,20 @@ WADEnemy2.prototype.damage = function(amount) {
             this.shakeStep = 0;
             this.shakeCount = 20;
             var position = this.game.camera.position;
-            if(this.shake_timer == null || !this.shake_timer.running)
-            {
+            if(this.shake_timer == null || !this.shake_timer.running) {
                 this.shake_timer = this.game.time.create(false);
                 this.shake_timer.loop(50, function(){
                     var halfCamera = 1920 / 2;
                     var sceneWidth = 2320 + 240;
 
+                    // If player is not at world bounds, we move the camera
+                    // accordingly to player position.
                     if(this.player.x >= halfCamera && this.player.x <= sceneWidth - halfCamera)
                         this.game.camera.x = this.player.x - halfCamera;
-                    else if(this.player.x < halfCamera)
-                        this.game.camera.x = 0;
-                    else
-                        this.game.camera.x = sceneWidth - 1920;
+
                     this.game.camera.y = 0
 
-                    if(this.shakeCount <= 0)
-                    {
+                    if(this.shakeCount <= 0) {
                         this.shake_timer.stop();
                         this.shake_timer = null;
                         this.game.shaking = false;
@@ -97,8 +96,7 @@ WADEnemy2.prototype.damage = function(amount) {
 
                     this.game.shaking = true;
 
-                    switch(this.shakeStep)
-                    {
+                    switch(this.shakeStep) {
                         case 0 :
                             // up right
                             this.game.camera.x = this.game.camera.x+10

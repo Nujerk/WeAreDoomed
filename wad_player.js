@@ -86,13 +86,11 @@ WADPlayer.prototype.update = function() {
         }
     });
 
-    // this.game.debug.body(this);
-
-	/// Player bullets damage enemies
+	// Player bullets damage enemies
     this.game.physics.arcade.overlap(this.weapon.bullets, this.enemies, this.onBulletHit);
     this.game.physics.arcade.overlap(this.weapon.specialBullets, this.enemies, this.onBulletHit);
 
-    /// Player and weapon collides together (so that player can pick them up)
+    // Player and weapon collides together (so that player can pick them up)
     this.game.physics.arcade.overlap(this, this.weapons, this.onWeaponCollide);
 
     this.weapon.update();
@@ -247,7 +245,6 @@ WADPlayer.prototype.jump = function(){
 	if(this.body.velocity.y != 0 || this.locked)
 		return;
 	this.body.velocity.y = PLAYER_JUMP_VELOCITY;
-    this.moving = true;
 };
 
 WADPlayer.prototype.shoot = function(){

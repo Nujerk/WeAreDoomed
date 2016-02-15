@@ -7,6 +7,7 @@ GameTemplate.Game.prototype = {
     },
 
     create: function() {
+        // Best music, EVER !
         this.musicBg = this.add.audio('zik');
         this.musicBg.loopFull(0.4);
 
